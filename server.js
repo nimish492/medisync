@@ -19,8 +19,10 @@ const upload = multer({ storage: storage });
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+const uri = "mongodb+srv://rajeshgupta01457:3tlFFJBy1uEJiT2r@cluster0.emtam.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/hospital', {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
