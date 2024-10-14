@@ -129,9 +129,9 @@ margin-top: 150px;
 /* Dashboard sections */
 .dashboard-sections {
     display: grid;
-    grid-template-columns: repeat(3, 470px);
+    grid-template-columns: repeat(3, 413px);
     gap: 20px;
-    margin-top: 55px;
+    margin-top: 7px;
     margin-left: 215px;
 }
 
