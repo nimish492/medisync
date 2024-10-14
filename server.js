@@ -22,15 +22,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const uri = "mongodb+srv://rajeshgupta01457:3tlFFJBy1uEJiT2r@cluster0.emtam.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // Connect to MongoDB
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(uri);
 
 // Define Patient model
 const Patient = mongoose.model('Patient', new mongoose.Schema({
     name: String,
-    dob: Date,
     age: Number,
     symptoms: String,
     diagnosis: String,
@@ -74,7 +70,6 @@ app.post('/api/patients', upload.single('image'), async (req, res) => {
         // Process form data
         const newPatientData = {
             name: req.body.name,
-            dob: new Date(req.body.dob),
             age: req.body.age,
             symptoms: req.body.symptoms,
             diagnosis: req.body.diagnosis,

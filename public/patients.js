@@ -81,8 +81,6 @@ $(document).ready(function () {
             url: `/api/patients/${patientId}`,
             type: 'GET',
             success: function (patient) {
-                // Format date fields to YYYY-MM-DD
-                const formattedDob = new Date(patient.dob).toISOString().split('T')[0];
 
                 // Store original data when modal is opened
                 originalPatientData = {
@@ -145,9 +143,8 @@ $(document).ready(function () {
         if ($('#patient-name').val() !== originalPatientData.name) {
             updatedData.name = $('#patient-name').val();
         }
-        if ($('#patient-dob').val() !== originalPatientData.dob) {
-            updatedData.dob = $('#patient-dob').val();
-        }
+       
+        
         if ($('#patient-age').val() !== originalPatientData.age) {
             updatedData.age = $('#patient-age').val();
         }
