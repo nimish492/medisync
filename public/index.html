@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+    <!-- jQuery (required for resizable functionality) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI for resizable functionality -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="./assets/logo.png" class="logo-img">
+            </div>
+            <ul class="nav-list">
+                <li><a href="./index.html">Dashboard</a></li>
+                <li><a href="./patients.html">Patients</a></li>
+                <li><a href="./billing/billing.html">Billing</a></li>
+                <li><a href="./index.html">LogOut</a></li>
+            </ul>
+            <div class="doctor-container">
+                <h3 style="color: #00796b">Doctor on Duty</h3>
+                <img src="../assets/Dr.-G.-Aurobinda-Mohapatra.jpg" class="doctor">
+                <p class="first">Dr. Ashutosh Rana</p>
+                <p class="room">Room: D-232</p>
+                <p class="room">(Duty till 5 pm)</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Dashboard Sections -->
+            <div class="dashboard-sections">
+                <!-- Patient List Section -->
+    
+                <section class="patient-list-section">
+
+                    <h2>Patient List</h2>
+
+                    <div class="patient-list">
+
+
+                    </div>
+
+                </section>
+
+                <!-- Consultation Section -->
+                <section class="consultation-section">
+                    <h2>Patient Information</h2>
+                    <div class="consultation-details">
+                        <div class="details">
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calendar Section -->
+                <section class="calendar-section">
+                    <div id="calendar-container">
+                        <div id="calendar"></div>
+
+                        <!-- Calendar content here -->
+                    </div>
+                </section>
+
+                <!-- medicine Section -->
+                <section class="blood-formula-section">
+                    <h2>Medicines</h2>
+                    <div class="blood-formula">
+                        <table class="medicines-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Dosage</th>
+                                    <th>Frequency</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Medicines rows will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Blood Analysis Section -->
+                <section class="blood-analysis-section">
+                    <h2>IV Fluid Bag %</h2>
+                    <div class="chart-container1">
+                        <canvas id="line-chart1"></canvas>
+                    </div>
+                </section>
+
+                <!-- Body Temperature Section -->
+                <section class="body-temperature-section">
+                    <h2>Urine Bag % </h2>
+                    <div class="chart-container2">
+                        <canvas id="line-chart2"></canvas>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

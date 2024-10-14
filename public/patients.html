@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients Management</title>
+    <link rel="stylesheet" href="patients.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../assets/logo.png" class="logo-img" alt="Logo">
+            </div>
+            <ul class="nav-list">
+                <li><a href="./index.html">Dashboard</a></li>
+                <li><a href="patients.html">Patients</a></li>
+                <li><a href="../billing/billing.html">Billing</a></li>
+                <li><a href="./index.html">LogOut</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2>Patient Management</h2>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="patient-search" placeholder="Search patients...">
+                <button id="add-patient">Add Patient</button>
+            </div>
+
+            <!-- Patient List Section -->
+            <section class="patient-list-section">
+                <div class="patient-list">
+                    <!-- Dynamic patient data will be inserted here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Patient Details -->
+    <div id="patientModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <!-- Inside patientModal -->
+            <p><strong>Name:</strong> <input type="text" id="patient-name" value=""></p>
+            <p><strong>Age:</strong> <input type="number" id="patient-age" value=""></p>
+            <p><strong>Symptoms:</strong> <input type="text" id="patient-symptoms" value=""></p>
+            <p><strong>Diagnosis:</strong> <input type="text" id="patient-diagnosis" value=""></p>
+            <p><strong>Physician:</strong> <input type="text" id="patient-physician" value=""></p>
+            
+            <select id="status-select">
+                <option value="On drip">On drip</option>
+                <option value="Off drip">Off drip</option>
+            </select>
+
+            <table id="medicine-table" class="medicines-list">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dosage</th>
+                        <th>Frequency</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+            </table>
+            <div class="btn">
+                <button onclick="deletePatient()" id="delete-patient">Delete</button> <!-- Delete button -->
+                <button onclick="editPatient()" id="edit-patient">Edit</button> <!-- Edit button, if needed -->
+                <button id="add-medicine-btn">Add Medicine</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Adding a Patient -->
+    <div id="patientFormModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFormModal()">&times;</span>
+            <h2>Add Patient</h2>
+            <form id="patientForm" enctype="multipart/form-data">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+
+                <label for="symptoms">Symptoms:</label>
+                <input type="text" id="symptoms" name="symptoms" required>
+
+                <label for="diagnosis">Diagnosis:</label>
+                <input type="text" id="diagnosis" name="diagnosis" required>
+
+                <label for="physician">Physician:</label>
+                <input type="text" id="physician" name="physician" required>
+
+
+                <div class="form-group">
+                    <label for="image">Patient Image:</label>
+                    <input type="file" name="image" id="image" accept="image/*">
+                </div>
+
+                <h3>Medicines</h3>
+                <div id="medicineInputs">
+                    <div class="medicine">
+                        <label for="medName">Name:</label>
+                        <input type="text" id="medName" name="medName[]" required>
+
+                        <label for="dosage">Dosage:</label>
+                        <input type="text" id="dosage" name="dosage[]" required>
+
+                        <label for="frequency">Frequency:</label>
+                        <input type="text" id="frequency" name="frequency[]" required>
+
+                        <label for="duration">Duration:</label>
+                        <input type="text" id="duration" name="duration[]" required>
+                    </div>
+                </div>
+                <button type="button" onclick="addMedicineInput()">Add Another Medicine</button>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="patients.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,642 @@
+/* General styles remain the same */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 200px;
+    background-color: #e3f2fd;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 800px;
+    position: fixed;
+}
+
+.nav-list a:hover {
+    color: #333333;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+
+
+
+.logo-img {
+    width: 70px;
+    /* Set a specific width */
+    height: 70px;
+    /* Set a specific height */
+    border-radius: 50%;
+    /* Makes the image circular */
+    border: 2px solid #00796b;
+    /* Adds a border around the image */
+}
+
+
+img {
+    width: 50px;
+    /* Set a specific width */
+    height: 50px;
+    /* Set a specific height */
+    border-radius: 50%;
+    /* Makes the image circular */
+    border: 2px solid #00796b;
+    /* Adds a border around the image */
+}
+
+.doctor-container {
+    margin-top: 150px;
+}
+
+.doctor {
+    width: 100px;
+    /* Set a specific width */
+    height: 100px;
+    /* Set a specific height */
+    border-radius: 50%;
+    /* Makes the image circular */
+    border: 2px solid #00796b;
+    /* Adds a border around the image */
+    margin-left: 15px;
+}
+
+.first {
+    color: #00796b;
+    font-size: small;
+    margin-left: 13px
+}
+
+.room {
+    color: #999999;
+    font-size: x-small;
+    margin-left: 35px;
+}
+
+.mainpatient {
+    width: 150px;
+    /* Set a specific width */
+    height: 150px;
+    /* Set a specific height */
+    border-radius: 50%;
+    /* Makes the image circular */
+    border: 2px solid #00796b;
+    /* Adds a border around the image */
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.nav-list li {
+    margin-bottom: 20px;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: #00796b;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 215px;
+}
+
+
+/* Updated Patient List Section */
+.patient-list-section {
+    background-color: #f5f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.patient-list-section h2 {
+    color: #3f51b5;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+#patient-search {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #00796b;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+
+#add-patient {
+    padding: 12px 24px;
+    background-color: #00796b;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+#addPatientBtn:hover {
+    background-color: #303f9f;
+}
+
+/* Updated Patient List Styles */
+/* Patient List Section */
+.patient-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Three columns */
+    gap: 20px;
+    /* Space between grid items */
+}
+
+/* Individual patient item */
+.patient {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    /* Indicates clickable items */
+}
+
+.patient img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.patient-info h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #00796b;
+}
+
+.patient-info p {
+    margin: 0;
+    font-size: 12px;
+    color: #999999;
+}
+
+.status {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.ongoing {
+    color: #4caf50;
+}
+
+.offgoing {
+    color: #fc0808b1;
+}
+
+
+.report {
+    color: #625e5e;
+    font-style: normal;
+    font-size: x-small;
+    text-decoration: none;
+}
+
+
+/* Modal styles */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 15px;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+.modal-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+
+#edit-patient,
+#delete-patient,
+#add-medicine-btn,
+#delete-medicine-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    /* Add padding for better spacing */
+    font-size: 16px;
+    /* Increase font size for better readability */
+    font-weight: bold;
+    /* Make text bold */
+    text-align: center;
+    text-decoration: none;
+    /* Remove underline */
+    border: none;
+    /* Remove default border */
+    cursor: pointer;
+    /* Change cursor to pointer */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Smooth transitions */
+}
+
+#edit-patient {
+    background-color: #00796b;
+    /* Green */
+    color: rgba(255, 255, 255, 0.816);
+    border-radius: 20px;
+    /* Rounded corners */
+}
+
+#delete-patient {
+    background-color: #6e0801;
+    /* Red */
+    color: rgba(255, 255, 255, 0.816);
+    border-radius: 20px;
+    /* Rounded corners */
+}
+
+#edit-patient:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+    /* Lighter green */
+    
+    /* Slightly enlarge the button on hover */
+}
+
+#delete-patient:hover {
+    background-color: #e53935;
+    /* Lighter red */
+    transform: scale(1.05);
+    /* Slightly enlarge the button on hover */
+}
+
+
+
+/* Add Medicine Button */
+#add-medicine-btn {
+
+    background-color: #1a5a9f;
+    /* Blue */
+    color: rgba(255, 255, 255, 0.816);
+    border-radius: 20px;
+    /* Rounded corners */
+}
+
+#add-medicine-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    /* Darker Blue */
+}
+
+/* Delete Medicine Button */
+.delete-medicine-btn {
+    background-color: #e53935;
+    color: rgba(255, 255, 255, 0.816);
+    border-radius: 20px;
+    /* Rounded corners */
+}
+
+.delete-medicine-btn:hover {
+    background-color: #a71d2a;
+    transform: scale(1.05);
+    /* Darker Red */
+}
+
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Additional styling for patient list, consultation section, and medicine table */
+.patient-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.patient-list ul li {
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.patient-list ul li:hover {
+    background-color: #ddd;
+}
+
+#consultation-section {
+    margin-bottom: 20px;
+}
+
+#medicine-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#medicine-table th,
+#medicine-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#medicine-table th {
+    background-color: #f2f2f2;
+}
+
+
+/* Modal Background */
+#patientFormModal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Dark background with transparency */
+}
+
+/* Modal Content */
+#patientFormModal .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+/* Close Button */
+#patientFormModal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#patientFormModal .close:hover,
+#patientFormModal .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form Container */
+#patientForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Space between form fields */
+}
+
+/* Labels */
+#patientForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Input Fields */
+#patientForm input[type="text"],
+#patientForm input[type="date"],
+#patientForm input[type="number"],
+#patientForm input[type="file"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensure padding doesn't affect width */
+    transition: border-color 0.3s ease;
+}
+
+#patientForm input[type="text"]:focus,
+#patientForm input[type="date"]:focus,
+#patientForm input[type="number"]:focus,
+#patientForm input[type="file"]:focus {
+    border-color: #00796b;
+    /* Highlight border on focus */
+    outline: none;
+}
+
+/* Button Styles */
+#patientForm button[type="submit"],
+#patientForm button[type="button"] {
+    background-color: #00796b;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+#patientForm button[type="submit"]:hover,
+#patientForm button[type="button"]:hover {
+    background-color: #005f55;
+    transform: scale(1.05);
+}
+
+/* Medicine Section */
+#medicineInputs .medicine {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#medicineInputs .medicine label {
+    flex-basis: 100%;
+}
+
+#medicineInputs .medicine input {
+    flex: 1;
+    min-width: calc(50% - 10px);
+}
+
+/* Add Another Medicine Button */
+#patientForm button[type="button"] {
+    background-color: #5c6bc0;
+}
+
+#patientForm button[type="button"]:hover {
+    background-color: #3f51b5;
+}
+
+/* Form Headings */
+#patientFormModal h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    border-bottom: 2px solid #00796b;
+    padding-bottom: 10px;
+}
+
+/* Modal Spacing */
+#patientFormModal .modal-content {
+    padding: 30px;
+}
+
+/* Adjust spacing for medicine section */
+#patientFormModal h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #00796b;
+}
+
+
+#status-select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="time"],
+select {
+    border: none;
+    /* Remove the default border */
+    outline: none;
+    /* Remove the default outline on focus */
+    padding: 8px;
+    /* Add padding for better spacing */
+    background-color: transparent;
+    /* Make background transparent */
+    font-size: 16px;
+    /* Increase font size for readability */
+    box-shadow: none;
+    /* Remove any box shadow */
+    transition: background-color 0.3s ease-in-out;
+    /* Add transition for background color */
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="time"]:focus,
+select:focus {
+    background-color: #f0f0f0;
+    /* Change background color on focus for better visibility */
+}
+
+
+
+
+/* Responsive Design */
+
+@media (max-width: 1024px) {
+    .dashboard-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        height: 100%;
+    }
+
+    .patient-list-section {
+        max-height: 100%;
+    }
+
+    .patient-list {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .patient {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .patient-info {
+        text-align: center;
+    }
+
+    html,
+    body {
+        width: 100vh;
+        height: 100vh;
+    }
+}
