@@ -129,7 +129,7 @@ margin-top: 150px;
 /* Dashboard sections */
 .dashboard-sections {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 470px);
     gap: 20px;
     margin-top: 55px;
     margin-left: 215px;
@@ -142,6 +142,7 @@ section {
     height: 300px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
 }
 
 
@@ -221,6 +222,7 @@ section {
     text-align: center;
     font-weight: bold;
     color: #00796b;
+    
 }
 
 /* Blood Analysis Section */
@@ -283,17 +285,23 @@ height: 285px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
+    
 }
 
 .medicines-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
+    
 }
 
 .medicines-table th, .medicines-table td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* Allows long words to break and wrap */
+  word-break: break-all; /* Breaks long words at arbitrary points to wrap */
+  white-space: normal;   /* Allows text to wrap normally */
 }
 
 .medicines-table th {
