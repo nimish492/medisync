@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const uri = "mongodb+srv://rajeshgupta01457:3tlFFJBy1uEJiT2r@cluster0.emtam.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // Connect to MongoDB
-mongoose.connect(uri);
+mongoose.connect(uri); ///uri
 
 // Define Patient model
 const Patient = mongoose.model('Patient', new mongoose.Schema({
