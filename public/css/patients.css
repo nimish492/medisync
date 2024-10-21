@@ -165,7 +165,7 @@ img {
 /* Patient List Section */
 .patient-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     /* Three columns */
     gap: 20px;
     /* Space between grid items */
@@ -303,7 +303,7 @@ img {
     /* Rounded corners */
 }
 
-#delete-patient {
+.delete-patient {
     background-color: #6e0801;
     /* Red */
     color: rgba(255, 255, 255, 0.816);
@@ -315,7 +315,7 @@ img {
     background-color: #45a049;
     transform: scale(1.05);
     /* Lighter green */
-    
+
     /* Slightly enlarge the button on hover */
 }
 
