@@ -123,10 +123,10 @@ body {
 
 .dashboard-sections {
     display: grid;
-    grid-template-columns: repeat(2, 700px);
+    grid-template-columns: repeat(2, 620px);
     gap: 20px;
-    margin-top: 48px;
-    margin-left: 215px;
+    margin-top: 5px;
+    margin-left: 229px;
 }
 
 section {
