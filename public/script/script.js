@@ -127,12 +127,11 @@ $(document).ready(function () {
                                     data: [100, 89, 72, 68, 55, 43, 30],
                                     borderColor: 'rgba(75, 192, 192, 1)',
                                     borderWidth: 2,
-                                    fill: false,
                                     pointBackgroundColor: ['rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)']
                                 }]
                             },
                             options: {
-                                responsive: false,
+                                responsive: true,
                                 maintainAspectRatio: false,
                             }
                         });

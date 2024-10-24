@@ -10,6 +10,14 @@ body {
     display: flex;
 }
 
+
+
+
+
+
+
+
+
 /* Sidebar styles */
 .sidebar {
     width: 200px;
@@ -30,30 +38,18 @@ h2 {
     font-size: 1.8em;
 }
 
-
-
-
 .logo-img {
     width: 70px;
-    /* Set a specific width */
     height: 70px;
-    /* Set a specific height */
     border-radius: 50%;
-    /* Makes the image circular */
     border: 2px solid #00796b;
-    /* Adds a border around the image */
 }
-
 
 img {
     width: 50px;
-    /* Set a specific width */
     height: 50px;
-    /* Set a specific height */
     border-radius: 50%;
-    /* Makes the image circular */
     border: 2px solid #00796b;
-    /* Adds a border around the image */
 }
 
 .doctor-container {
@@ -62,20 +58,16 @@ img {
 
 .doctor {
     width: 100px;
-    /* Set a specific width */
     height: 100px;
-    /* Set a specific height */
     border-radius: 50%;
-    /* Makes the image circular */
     border: 2px solid #00796b;
-    /* Adds a border around the image */
     margin-left: 15px;
 }
 
 .first {
     color: #00796b;
     font-size: small;
-    margin-left: 13px
+    margin-left: 13px;
 }
 
 .room {
@@ -86,13 +78,9 @@ img {
 
 .mainpatient {
     width: 150px;
-    /* Set a specific width */
     height: 150px;
-    /* Set a specific height */
     border-radius: 50%;
-    /* Makes the image circular */
     border: 2px solid #00796b;
-    /* Adds a border around the image */
 }
 
 .nav-list {
@@ -113,7 +101,6 @@ img {
     text-align: center;
 }
 
-
 .main-content {
     flex-grow: 1;
     padding: 20px;
@@ -121,7 +108,16 @@ img {
 }
 
 
-/* Updated Patient List Section */
+
+
+
+
+
+
+
+
+
+/*  Patient List Section */
 .patient-list-section {
     background-color: #f5f7fa;
     padding: 20px;
@@ -145,7 +141,6 @@ img {
     box-sizing: border-box;
 }
 
-
 #add-patient {
     padding: 12px 24px;
     background-color: #00796b;
@@ -161,17 +156,22 @@ img {
     background-color: #303f9f;
 }
 
-/* Updated Patient List Styles */
-/* Patient List Section */
+
+
+
+
+
+
+
+
+
+/* Patient List Styles */
 .patient-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* Three columns */
     gap: 20px;
-    /* Space between grid items */
 }
 
-/* Individual patient item */
 .patient {
     display: flex;
     align-items: center;
@@ -181,7 +181,6 @@ img {
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;
-    /* Indicates clickable items */
 }
 
 .patient img {
@@ -215,7 +214,6 @@ img {
     color: #fc0808b1;
 }
 
-
 .report {
     color: #625e5e;
     font-style: normal;
@@ -224,10 +222,22 @@ img {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Modal styles */
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -235,11 +245,20 @@ img {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Modal Content */
 .modal-content {
@@ -249,9 +268,7 @@ img {
     border: 1px solid #888;
     border-radius: 15px;
     width: 80%;
-    /* Could be more or less, depending on screen size */
 }
-
 
 .modal-actions {
     margin-top: 20px;
@@ -272,143 +289,35 @@ img {
     gap: 15px;
 }
 
-
-#edit-patient,
-#delete-patient,
-#add-medicine-btn,
-#delete-medicine-btn {
+#delete-patient {
     display: inline-block;
     padding: 10px 20px;
-    /* Add padding for better spacing */
     font-size: 16px;
-    /* Increase font size for better readability */
     font-weight: bold;
-    /* Make text bold */
     text-align: center;
     text-decoration: none;
-    /* Remove underline */
     border: none;
-    /* Remove default border */
     cursor: pointer;
-    /* Change cursor to pointer */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Smooth transitions */
 }
 
-#edit-patient {
-    background-color: #00796b;
-    /* Green */
-    color: rgba(255, 255, 255, 0.816);
-    border-radius: 20px;
-    /* Rounded corners */
-}
 
 .delete-patient {
     background-color: #6e0801;
-    /* Red */
     color: rgba(255, 255, 255, 0.816);
     border-radius: 20px;
-    /* Rounded corners */
-}
-
-#edit-patient:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-    /* Lighter green */
-
-    /* Slightly enlarge the button on hover */
 }
 
 #delete-patient:hover {
     background-color: #e53935;
-    /* Lighter red */
     transform: scale(1.05);
-    /* Slightly enlarge the button on hover */
 }
 
 
 
-/* Add Medicine Button */
-#add-medicine-btn {
-
-    background-color: #1a5a9f;
-    /* Blue */
-    color: rgba(255, 255, 255, 0.816);
-    border-radius: 20px;
-    /* Rounded corners */
-}
-
-#add-medicine-btn:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-    /* Darker Blue */
-}
-
-/* Delete Medicine Button */
-.delete-medicine-btn {
-    background-color: #e53935;
-    color: rgba(255, 255, 255, 0.816);
-    border-radius: 20px;
-    /* Rounded corners */
-}
-
-.delete-medicine-btn:hover {
-    background-color: #a71d2a;
-    transform: scale(1.05);
-    /* Darker Red */
-}
 
 
-/* Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Additional styling for patient list, consultation section, and medicine table */
-.patient-list ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.patient-list ul li {
-    padding: 10px;
-    background-color: #f4f4f4;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
-
-.patient-list ul li:hover {
-    background-color: #ddd;
-}
-
-#consultation-section {
-    margin-bottom: 20px;
-}
-
-#medicine-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#medicine-table th,
-#medicine-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#medicine-table th {
-    background-color: #f2f2f2;
-}
 
 
 /* Modal Background */
@@ -422,8 +331,16 @@ img {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Dark background with transparency */
 }
+
+
+
+
+
+
+
+
+
 
 /* Modal Content */
 #patientFormModal .modal-content {
@@ -433,10 +350,17 @@ img {
     border: 1px solid #888;
     width: 50%;
     border-radius: 10px;
-    /* Rounded corners */
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     max-width: 600px;
 }
+
+
+
+
+
+
+
+
 
 /* Close Button */
 #patientFormModal .close {
@@ -453,22 +377,28 @@ img {
     cursor: pointer;
 }
 
+
+
+
+
+
+
+
 /* Form Container */
 #patientForm {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* Space between form fields */
 }
 
-/* Labels */
+
 #patientForm label {
     font-weight: bold;
     margin-bottom: 5px;
     color: #333;
 }
 
-/* Input Fields */
+
 #patientForm input[type="text"],
 #patientForm input[type="date"],
 #patientForm input[type="number"],
@@ -479,7 +409,6 @@ img {
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
-    /* Ensure padding doesn't affect width */
     transition: border-color 0.3s ease;
 }
 
@@ -488,9 +417,18 @@ img {
 #patientForm input[type="number"]:focus,
 #patientForm input[type="file"]:focus {
     border-color: #00796b;
-    /* Highlight border on focus */
     outline: none;
 }
+
+
+
+
+
+
+
+
+
+
 
 /* Button Styles */
 #patientForm button[type="submit"],
@@ -512,6 +450,12 @@ img {
     transform: scale(1.05);
 }
 
+
+
+
+
+
+
 /* Medicine Section */
 #medicineInputs .medicine {
     display: flex;
@@ -528,77 +472,11 @@ img {
     min-width: calc(50% - 10px);
 }
 
-/* Add Another Medicine Button */
-#patientForm button[type="button"] {
-    background-color: #5c6bc0;
-}
-
-#patientForm button[type="button"]:hover {
-    background-color: #3f51b5;
-}
-
-/* Form Headings */
-#patientFormModal h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-    border-bottom: 2px solid #00796b;
-    padding-bottom: 10px;
-}
-
-/* Modal Spacing */
-#patientFormModal .modal-content {
-    padding: 30px;
-}
-
-/* Adjust spacing for medicine section */
-#patientFormModal h3 {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: #00796b;
-}
 
 
-#status-select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
 
-input[type="text"],
-input[type="date"],
-input[type="number"],
-input[type="time"],
-select {
-    border: none;
-    /* Remove the default border */
-    outline: none;
-    /* Remove the default outline on focus */
-    padding: 8px;
-    /* Add padding for better spacing */
-    background-color: transparent;
-    /* Make background transparent */
-    font-size: 16px;
-    /* Increase font size for readability */
-    box-shadow: none;
-    /* Remove any box shadow */
-    transition: background-color 0.3s ease-in-out;
-    /* Add transition for background color */
-}
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="number"]:focus,
-input[type="time"]:focus,
-select:focus {
-    background-color: #f0f0f0;
-    /* Change background color on focus for better visibility */
-}
+
 
 
 

@@ -9,7 +9,7 @@ $(document).ready(function () {
 
                 patients.forEach(patient => {
                     const patientElement = `
-                        <div class="patient" data-id="${patient._id}" onclick="openModal('${patient._id}')">
+                        <div class="patient" data-id="${patient._id}" )">
                             <img src="/${patient.image}" alt="Patient" width="50px" height="50px">
                             <div class="patient-info">
                                 <h3>${patient.name}</h3>
@@ -130,7 +130,6 @@ $(document).ready(function () {
         });
 
 
-        formData.append('medicines', JSON.stringify(medicines));   // (Convert medicines array to JSON and append to formData)
 
         $.ajax({
             url: '/api/patients',

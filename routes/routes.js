@@ -9,7 +9,7 @@ const path = require('path');
 // Setup multer for file upload////////////////////////////////////////////////////////////////////////////
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'public', 'assets'));
+        cb(null, path.join(__dirname, '..', 'public', 'assets'));
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname);
@@ -88,19 +88,5 @@ router.delete('/patients/:id', async (req, res) => {
 
 
 
-
-// Search patients/////////////////////////////////////////////////////////////////
-router.get('/search-patients', async (req, res) => {
-    try {
-        const searchTerm = req.query.q;
-        const patients = await Patient.find({
-            name: { $regex: searchTerm, $options: 'i' }
-        }).select('name');
-
-        res.json(patients);
-    } catch (error) {
-        res.status(500).json({ error: 'Error searching patients.' });
-    }
-});
 
 module.exports = router;
