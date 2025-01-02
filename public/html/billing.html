@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients Management</title>
+    <link rel="stylesheet" href="../css/billing.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../assets/logo.png" class="logo-img" alt="Logo">
+            </div>
+            <ul class="nav-list">
+                <li><a href="../html/index.html">Dashboard</a></li>
+                <li><a href="../html/patients.html">Patients</a></li>
+                <li><a href="../html/billing.html">Billing</a></li>
+                <li><a href="/logout">LogOut</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2>Billing</h2>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="patient-search" placeholder="Search patients..." autocomplete="off">
+                <ul class="dropdown-list" id="dropdown-list"></ul>
+            </div>
+
+            <!-- Division for Patient Details and Billing -->
+            <div class="division">
+                <!-- Patient Forms Section -->
+                <section class="patient-list-section" id="patient-details-section" style="height: 465px;">
+                    <!-- Forms will be dynamically inserted here -->
+                </section>
+
+                <!-- Bill Section -->
+                <section class="bill-section" id="bill-section" style="height:465px;">
+                    <div id="billing-table-container">
+                        <div id="billing">
+                            <h3>Billing Details</h3>
+                            <p id="patient-id"></p>
+                            <p id="patient-name"></p>
+                            <p id="patient-age"></p>
+                            <p id="patient-physician"></p>
+                            <table id="billing-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Details</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table rows will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button id="print-bill-btn">Print Bill</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../script/billing.js"></script>
+</body>
+
+</html>
