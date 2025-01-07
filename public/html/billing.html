@@ -7,7 +7,9 @@
     <title>Patients Management</title>
     <link rel="stylesheet" href="../css/billing.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
 </head>
 
 <body>
@@ -46,23 +48,9 @@
                 <section class="bill-section" id="bill-section" style="height:465px;">
                     <div id="billing-table-container">
                         <div id="billing">
-                            <h3>Billing Details</h3>
-                            <p id="patient-id"></p>
-                            <p id="patient-name"></p>
-                            <p id="patient-age"></p>
-                            <p id="patient-physician"></p>
-                            <table id="billing-table">
-                                <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Details</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Table rows will be inserted here -->
-                                </tbody>
-                            </table>
+                            <div id="billing-details"></div>
+                            <div id="billing-data"></div>
+
                         </div>
                         <button id="print-bill-btn">Print Bill</button>
                     </div>

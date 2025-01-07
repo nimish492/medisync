@@ -101,11 +101,18 @@ button:hover {
 
 @media (max-width: 768px) {
   .divide {
-    flex-direction: column;
+    flex-direction: inherit;
+    align-items: center;
   }
 
   .form-container,
   .docoration {
-    width: 100%;
+    max-width: 250px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  #bg {
+    height: 32vh;
   }
 }

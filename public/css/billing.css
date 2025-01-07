@@ -142,10 +142,12 @@ img {
   max-width: 465px;
   width: 50%;
   max-height: 100%;
+  position: relative;
 }
 
 #billing-table-container {
   margin-top: 20px;
+  position: relative;
 }
 
 #billing-table {
@@ -288,10 +290,130 @@ img {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
-  position: fixed;
-  top: 617px;
+  position: absolute;
+  top: 400px;
 }
 
 #print-bill-btn:hover {
   background-color: #45a049;
+}
+
+@media (max-width: 1400px) {
+  .division {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    height: 100%;
+  }
+
+  .patient-list-section {
+    max-height: 100%;
+    width: 900px;
+  }
+
+  .patient-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .patient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .patient-info {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  .division {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    height: 100%;
+  }
+
+  .patient-list-section {
+    max-height: 100%;
+    width: 700px;
+  }
+
+  .patient-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .patient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .patient-info {
+    text-align: center;
+  }
+}
+
+@media (max-width: 980px) {
+  .division {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    height: 100%;
+  }
+
+  .patient-list-section {
+    max-height: 100%;
+    width: 500px;
+  }
+
+  .patient-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .patient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .patient-info {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .division {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    height: 100%;
+  }
+
+  .patient-list-section {
+    max-height: 100%;
+    width: 500px;
+  }
+
+  .patient-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .patient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .patient-info {
+    text-align: center;
+  }
 }

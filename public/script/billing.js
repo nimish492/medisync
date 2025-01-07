@@ -99,11 +99,12 @@ $(document).ready(function () {
                     `);
         });
 
+        $("#billing-details").html(` <h3>Billing Details</h3>
+                            <p id="patient-id">ID: ${patient._id}</p>
+                            <p id="patient-name">Name: ${patient.name}</p>
+                            <p id="patient-age">Age:${patient.age}</p>
+                            <p id="patient-physician">Physician:${patient.physician}</p>`);
         // Update billing section with patient details
-        $("#patient-name").text(`Name: ${patient.name}`);
-        $("#patient-age").text(`Age:${patient.age}`);
-        $("#patient-physician").text(`Physician:${patient.physician}`);
-        $("#patient-id").text(`ID: ${patient._id}`);
       },
       error: function () {
         console.error("Error fetching patient details.");
@@ -185,8 +186,18 @@ $(document).ready(function () {
     );
 
     // Update billing table
-    $("#billing-table tbody").html(`
-            <tr>
+    $("#billing-data").html(`
+      <div class="billing-print">
+                            <table id="billing-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Details</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
                 <td>Hospital Charges</td>
                 <td>Room Type: ${
                   hospitalCharges.roomType
@@ -207,12 +218,16 @@ $(document).ready(function () {
                   totalHospitalCharges + totalMedicinesCharges
                 }</strong></td>
             </tr>
+                                </tbody>
+                                
+                            </table>
+            </div>
         `);
   }
 
   // Generate and print the bill when button is clicked
-  document.getElementById("print-bill-btn").onclick = function () {
-    const billSection = document.getElementById("billing");
+  $(document).on("click", "#print-bill-btn", function () {
+    const billSection = $("#billing"); // Change this line
     const opt = {
       margin: 1,
       filename: "patient-bill.pdf",
@@ -220,6 +235,6 @@ $(document).ready(function () {
       html2canvas: { scale: 2 },
       jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
     };
-    html2pdf().from(billSection).set(opt).save();
-  };
+    html2pdf().from(billSection[0]).set(opt).save();
+  });
 });
