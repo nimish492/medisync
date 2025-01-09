@@ -112,7 +112,7 @@ img {
 
 .main-content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 10px;
   margin-left: 10px;
   height: 100vh;
   overflow-y: auto;
