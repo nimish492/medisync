@@ -8,6 +8,7 @@ body {
 
 .dashboard-container {
   display: flex;
+  flex-direction: row;
 }
 
 /* Sidebar styles */
@@ -378,5 +379,8 @@ img {
   }
   #patient-search {
     width: 100%;
+  }
+  .medicine-item {
+    flex-direction: column;
   }
 }
