@@ -105,14 +105,7 @@ button:hover {
     align-items: center;
   }
 
-  .form-container,
   .docoration {
-    max-width: 250px;
-    align-items: center;
-    justify-items: center;
-  }
-
-  #bg {
-    height: 32vh;
+    display: none;
   }
 }

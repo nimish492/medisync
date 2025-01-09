@@ -8,71 +8,22 @@ body {
 
 .dashboard-container {
   display: flex;
+  flex-direction: row;
 }
 
 /* Sidebar styles */
 .sidebar {
-  width: 200px;
+  width: 10%;
   background-color: #e3f2fd;
   padding: 20px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 800px;
-  position: fixed;
+  height: 100vh;
 }
 
-.nav-list a:hover {
-  color: #333333;
-}
-
-h2 {
-  font-size: 1.8em;
-}
-
-.logo-img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 2px solid #00796b;
-}
-
-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #00796b;
-}
-
-.doctor-container {
-  margin-top: 150px;
-}
-
-.doctor {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 2px solid #00796b;
-  margin-left: 15px;
-}
-
-.first {
-  color: #00796b;
-  font-size: small;
-  margin-left: 13px;
-}
-
-.room {
-  color: #999999;
-  font-size: x-small;
-  margin-left: 35px;
-}
-
-.mainpatient {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 2px solid #00796b;
+.nav-list-small {
+  display: none;
 }
 
 .nav-list {
@@ -93,10 +44,22 @@ img {
   text-align: center;
 }
 
+.nav-list a:hover {
+  color: #333333;
+}
+
+.logo-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #00796b;
+}
+
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  margin-left: 215px;
+  margin-left: 30px;
+  height: 100vh;
 }
 
 /*  Patient List Section */
@@ -371,17 +334,14 @@ img {
 
 /* Responsive Design */
 
-@media (max-width: 1024px) {
+@media (max-width: 1304px) {
   .dashboard-sections {
     grid-template-columns: 400px;
   }
 
-  .sidebar {
-    height: 100%;
-  }
-
   .patient-list-section {
-    max-height: 100%;
+    height: 58vh;
+    overflow-y: auto;
   }
 
   .patient-list {
@@ -398,4 +358,29 @@ img {
   .patient-info {
     text-align: center;
   }
+  .sidebar {
+    height: 100vh;
+    width: 5%;
+  }
+  .nav-list {
+    display: none;
+  }
+  .nav-list-small {
+    display: block;
+  }
+  .logo-img {
+    display: none;
+  }
+  .nav-list-small {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+  }
+  i {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 720px) {
 }
