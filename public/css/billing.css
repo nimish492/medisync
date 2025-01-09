@@ -118,7 +118,7 @@ img {
 }
 
 #patient-search {
-  width: 46.5%;
+  width: 63.5%;
   padding: 12px;
   margin-bottom: 20px;
   border: 2px solid #00796b;
@@ -374,6 +374,9 @@ img {
     height: 11rem;
   }
   .bill-section {
+    width: 100%;
+  }
+  #patient-search {
     width: 100%;
   }
 }
