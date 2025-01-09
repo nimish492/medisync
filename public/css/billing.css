@@ -145,6 +145,11 @@ img {
   position: relative;
 }
 
+#billing-data {
+  max-height: 225px;
+  overflow-y: auto;
+}
+
 #billing-table-container {
   margin-top: 20px;
   position: relative;
