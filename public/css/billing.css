@@ -1,4 +1,19 @@
 /* General styles remain the same */
+.my-scrollable-div {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  -ms-overflow-style: none;
+}
+
+.my-scrollable-div::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.my-scrollable-div::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -9,6 +24,11 @@ body {
 .dashboard-container {
   display: flex;
   flex-direction: row;
+  height: 100vh;
+}
+.container {
+  padding-left: 0px;
+  padding-right: 40px;
 }
 
 /* Sidebar styles */
@@ -20,6 +40,7 @@ body {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  z-index: unset;
 }
 
 .nav-list-small {
@@ -55,43 +76,6 @@ body {
   border: 2px solid #00796b;
 }
 
-img {
-  width: 50px; /* Set a specific width */
-  height: 50px; /* Set a specific height */
-  border-radius: 50%; /* Makes the image circular */
-  border: 2px solid #00796b; /* Adds a border around the image */
-}
-
-.doctor-container {
-  margin-top: 150px;
-}
-
-.doctor {
-  width: 100px; /* Set a specific width */
-  height: 100px; /* Set a specific height */
-  border-radius: 50%; /* Makes the image circular */
-  border: 2px solid #00796b; /* Adds a border around the image */
-  margin-left: 15px;
-}
-
-.first {
-  color: #00796b;
-  font-size: small;
-  margin-left: 13px;
-}
-
-.room {
-  color: #999999;
-  font-size: x-small;
-  margin-left: 35px;
-}
-
-.mainpatient {
-  width: 150px; /* Set a specific width */
-  height: 150px; /* Set a specific height */
-  border-radius: 50%; /* Makes the image circular */
-  border: 2px solid #00796b; /* Adds a border around the image */
-}
 .nav-list {
   list-style: none;
   padding: 0;
@@ -112,10 +96,10 @@ img {
 
 .main-content {
   flex-grow: 1;
-  padding: 10px;
-  margin-left: 10px;
-  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
   overflow-y: auto;
+  width: 100%;
 }
 
 #patient-search {

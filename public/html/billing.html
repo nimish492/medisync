@@ -37,36 +37,37 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <h2>Billing</h2>
+            <div class="container">
+                <h2>Billing</h2>
 
-            <!-- Search Bar -->
-            <div class="search-bar">
-                <input type="text" id="patient-search" placeholder="Search patients..." autocomplete="off">
-                <ul class="dropdown-list" id="dropdown-list"></ul>
-            </div>
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="patient-search" placeholder="Search patients..." autocomplete="off">
+                    <ul class="dropdown-list" id="dropdown-list"></ul>
+                </div>
 
-            <!-- Division for Patient Details and Billing -->
-            <div class="division">
-                <!-- Patient Forms Section -->
-                <section class="patient-list-section" id="patient-details-section">
-                    <!-- Forms will be dynamically inserted here -->
-                </section>
+                <!-- Division for Patient Details and Billing -->
+                <div class="division">
+                    <!-- Patient Forms Section -->
+                    <section class="patient-list-section" id="patient-details-section">
+                        <!-- Forms will be dynamically inserted here -->
+                    </section>
 
-                <!-- Bill Section -->
-                <section class="bill-section" id="bill-section" style="height:465px;">
-                    <div id="billing-table-container">
-                        <div id="billing">
-                            <div id="billing-details"></div>
-                            <div id="billing-data"></div>
+                    <!-- Bill Section -->
+                    <section class="bill-section" id="bill-section" style="height:465px;">
+                        <div id="billing-table-container">
+                            <div id="billing">
+                                <div id="billing-details"></div>
+                                <div id="billing-data"></div>
 
+                            </div>
+                            <button id="print-bill-btn">Print Bill</button>
                         </div>
-                        <button id="print-bill-btn">Print Bill</button>
-                    </div>
-                </section>
-            </div>
+                    </section>
+                </div>
         </main>
     </div>
-
+    </div>
     <script src="../script/billing.js"></script>
     <script src="../script/sidebar.js"></script>
 </body>

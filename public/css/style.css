@@ -1,5 +1,20 @@
 /*Body*/
 
+.my-scrollable-div {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  -ms-overflow-style: none;
+}
+
+.my-scrollable-div::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.my-scrollable-div::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -10,8 +25,13 @@ body {
 .dashboard-container {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 
+.container {
+  padding-left: 0px;
+  padding-right: 10px;
+}
 /*sidebar*/
 
 .sidebar {
@@ -57,30 +77,6 @@ body {
   border: 2px solid #00796b;
 }
 
-.doctor-container {
-  margin-top: 150px;
-}
-
-.doctor {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 2px solid #00796b;
-  margin-left: 15px;
-}
-
-.first {
-  color: #00796b;
-  font-size: small;
-  margin-left: 13px;
-}
-
-.room {
-  color: #999999;
-  font-size: x-small;
-  margin-left: 35px;
-}
-
 /* Dashboard*/
 
 .main-content {
@@ -95,17 +91,6 @@ body {
   margin-bottom: 20px;
   margin-left: 230px;
   position: fixed;
-}
-
-.greeting {
-  font-size: 24px;
-  color: #00796b;
-  margin-right: 950px;
-}
-
-.profile {
-  font-size: 14px;
-  color: #00796b;
 }
 
 .dashboard-sections {
@@ -222,7 +207,20 @@ img {
 }
 
 /*Medicine table*/
+.blood-formula-section {
+  position: relative;
+}
 
+.blood-formula-section h2 {
+  position: sticky;
+  width: 100%;
+  top: -16px;
+  z-index: 1;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
 .medicines-table {
   width: 100%;
   table-layout: fixed;

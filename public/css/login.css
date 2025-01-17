@@ -28,6 +28,7 @@ body {
 .divide {
   display: flex;
   width: 100%;
+  flex-direction: row;
 }
 
 .form-container {
@@ -99,20 +100,21 @@ button:hover {
   height: auto;
 }
 
-@media (max-width: 768px) {
-  .divide {
-    flex-direction: inherit;
-    align-items: center;
+@media screen and (max-width: 768px) {
+  .main {
+    width: 100%;
+    flex-direction: column;
   }
 
-  .form-container,
+  .form-container {
+    width: 100%;
+  }
+
   .docoration {
-    max-width: 250px;
-    align-items: center;
-    justify-items: center;
+    display: none;
   }
 
-  #bg {
-    height: 32vh;
+  .main {
+    margin: 20px;
   }
 }
