@@ -1,6 +1,14 @@
 $(document).ready(function () {
   let patients = [];
-  /// Function to fetch and display patient list//////////////////////////////////////////////////////////////////////////////////////
+  const doctors = [
+    { id: 1, name: "Dr. Priya Gupta" },
+    { id: 2, name: "Dr. Venkatesh Reddy" },
+    { id: 3, name: "Dr. Sara Gill" },
+    { id: 4, name: "Dr. Prakash Khurana" },
+    { id: 5, name: "Dr. Diya Gulati" },
+  ];
+
+  // Fetch and display patient list
   function fetchPatients() {
     $.ajax({
       url: "/api/patients",
@@ -11,40 +19,29 @@ $(document).ready(function () {
 
         patients.forEach((patient) => {
           const patientElement = `
-                        <div class="patient" data-id="${patient._id}" )">
-                            <img src="/${
-                              patient.image
-                            }" alt="Patient" width="50px" height="50px">
-                            <div class="patient-info">
-                                <h3>${patient.name}</h3>
-                                <a href="${
-                                  patient.reportLink
-                                }" class="report">Report</a>
-                            </div>
-                            <span class="status ${
-                              patient.status === "On drip"
-                                ? "ongoing"
-                                : "offgoing"
-                            }">${patient.status}</span>
-                            <button class="delete-patient" data-id="${
-                              patient._id
-                            }">Delete</button>
-                        </div>
-                    `;
+          <div class="patient" data-id="${patient._id}">
+            <img src="/${patient.image}" alt="Patient" width="50px" height="50px">
+            <div class="patient-info">
+              <div class="name-report">
+                <h3>${patient.name}</h3>
+                <a href="${patient.reportLink}" class="report">Report</a>
+              </div>
+            </div>
+            <button class="delete-patient" data-id="${patient._id}">Delete</button>
+          </div>
+        `;
           $(".patient-list").append(patientElement);
         });
 
-        // Attach view medicines button click event
         $(".patient").on("click", function (e) {
-          e.stopPropagation(); // Prevent triggering other events
+          e.stopPropagation();
           const patientId = $(this).data("id");
           const patient = patients.find((p) => p._id === patientId);
           openMedicineModal(patient);
         });
 
-        // Attach delete button click event
         $(".delete-patient").on("click", function (e) {
-          e.stopPropagation(); // Prevent triggering other events (e.g., openModal)
+          e.stopPropagation();
           const patientId = $(this).data("id");
           if (confirm("Are you sure you want to delete this patient?")) {
             deletePatient(patientId);
@@ -57,7 +54,7 @@ $(document).ready(function () {
     });
   }
 
-  ///// Function to delete a patient/////////////////////////////////////////////////////////////////////////////////////////////
+  // Delete a patient
   function deletePatient(patientId) {
     $.ajax({
       url: `/api/patients/${patientId}`,
@@ -73,36 +70,30 @@ $(document).ready(function () {
     });
   }
 
-  fetchPatients();
-  //////////////////////////////////////////////////////
-  // Function to remove medicine
+  // Remove medicine
   $(document).on("click", ".remove-medicine", function () {
     const patientId = $(this).data("patient-id");
     const medicineIndex = $(this).data("medicine-index");
-
     const patient = patients.find((p) => p._id === patientId);
+
     if (patient) {
       if (medicineIndex === -1) {
-        // If it's a new row, remove it directly from the DOM
         $(this).closest("tr").remove();
       } else {
-        // Remove from the medicines array (UI)
         patient.medicines.splice(medicineIndex, 1);
-
-        // Update the backend by sending the modified medicines array
         $.ajax({
           url: `/api/patients/${patient._id}/medicines`,
           method: "PUT",
           data: { medicines: patient.medicines },
           success: function (response) {
             const updatedPatient = response.patient;
-            const updatedPatientIndex = patients.findIndex(
+            const updatedIndex = patients.findIndex(
               (p) => p._id === updatedPatient._id
             );
-            if (updatedPatientIndex !== -1) {
-              patients[updatedPatientIndex] = updatedPatient; // Update the local array
+            if (updatedIndex !== -1) {
+              patients[updatedIndex] = updatedPatient;
             }
-            openMedicineModal(updatedPatient); // Refresh the modal with updated data
+            openMedicineModal(updatedPatient);
           },
           error: function (error) {
             console.error("Error updating medicines:", error);
@@ -113,7 +104,7 @@ $(document).ready(function () {
     }
   });
 
-  /// Search functionality/////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Search functionality
   $("#patient-search").on("input", function () {
     const searchTerm = $(this).val().toLowerCase();
     $(".patient").each(function () {
@@ -122,7 +113,7 @@ $(document).ready(function () {
     });
   });
 
-  ///////Show and close the form to add a new patient////////////////////////////////////////////////////////////////////////////
+  // Show and close add patient form
   $("#add-patient").click(function () {
     $("#patientFormModal").show();
   });
@@ -131,47 +122,29 @@ $(document).ready(function () {
     $("#patientFormModal").hide();
   };
 
-  // Static list of doctors (example)
-  const doctors = [
-    { id: "doctor1", name: "Dr. Priya Gupta" },
-    { id: "doctor2", name: "Dr. Venkatesh Reddy" },
-    { id: "doctor3", name: "Dr. Sara Gill" },
-    { id: "doctor4", name: "Dr. Prakash Khurana" },
-    { id: "doctor5", name: "Dr. Diya Gulati" },
-  ];
-
-  // Function to populate the physician dropdown
+  // Populate physician dropdown
   function populatePhysicianDropdown() {
     const physicianSelect = $("#physician");
-    physicianSelect.empty(); // Clear the existing options
-
-    // Add the default "Select a Physician" option
+    physicianSelect.empty();
     physicianSelect.append('<option value="">Select a Physician</option>');
 
-    // Add each doctor as an option in the dropdown
     doctors.forEach((doctor) => {
-      const option = `<option value="${doctor.id}">${doctor.name}</option>`;
-      physicianSelect.append(option);
+      physicianSelect.append(
+        `<option value="${doctor.id}">${doctor.name}</option>`
+      );
     });
   }
-
-  // Call the function to populate the dropdown when the page loads
   populatePhysicianDropdown();
 
-  ///////// Handle form submission for adding a new patient////////////////////////////////////////////////////////
+  // Add new patient
   $("#patientForm").on("submit", function (e) {
     e.preventDefault();
-
-    // Gather form data
     const formData = new FormData(this);
-
-    // Get the selected doctor's name instead of the id
     const selectedDoctorId = $("#physician").val();
     const selectedDoctor = doctors.find(
       (doctor) => doctor.id === selectedDoctorId
     );
 
-    // If a doctor is selected, add their name to the form data
     if (selectedDoctor) {
       formData.set("physician", selectedDoctor.name);
     }
@@ -195,15 +168,12 @@ $(document).ready(function () {
     });
   });
 
-  // Open the medicine modal for a specific patient
+  // Open medicine modal
   function openMedicineModal(patient) {
     $("#MedicineFormModal").show();
-
-    // Populate the medicine table dynamically
     const medicineTableBody = $("#medicine-table tbody");
-    medicineTableBody.empty(); // Clear previous medicines
+    medicineTableBody.empty();
 
-    // Add current medicines to the modal
     patient.medicines.forEach((medicine, index) => {
       const medicineRow = `
         <tr>
@@ -217,7 +187,6 @@ $(document).ready(function () {
       medicineTableBody.append(medicineRow);
     });
 
-    // Ensure that the "Add Medicine" button only adds one new row
     $("#addMedicineButton")
       .off("click")
       .on("click", function () {
@@ -233,28 +202,23 @@ $(document).ready(function () {
         medicineTableBody.append(newRow);
       });
 
-    // Save medicines when clicked
     $("#saveMedicinesButton").on("click", function () {
       const updatedMedicines = [];
-
-      // Collect updated medicines from the modal fields
       $("#medicine-table tbody tr").each(function () {
         const name = $(this).find(".medicine-name").val();
         const dosage = $(this).find(".medicine-dosage").val();
-
         if (name && dosage) {
           updatedMedicines.push({ name, dosage });
         }
       });
 
-      // Send updated medicines to the server
       $.ajax({
         url: `/api/patients/${patient._id}/medicines`,
         method: "PUT",
         data: { medicines: updatedMedicines },
         success: function () {
           fetchPatients();
-          closeMedicineModal(); // Close the modal after saving
+          closeMedicineModal();
         },
         error: function (error) {
           console.error("Error updating medicines:", error);
@@ -264,10 +228,10 @@ $(document).ready(function () {
     });
   }
 
-  // Close the medicine modal
+  // Close medicine modal
   window.closeMedicineModal = function () {
     $("#MedicineFormModal").hide();
   };
 
-  fetchPatients(); // Initially load the patients
+  fetchPatients(); // Initial fetch
 });

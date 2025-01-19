@@ -1,5 +1,19 @@
-/*Body*/
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+}
 
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #00796b;
+}
+
+/* Scrollbar Styles */
 .my-scrollable-div {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -15,13 +29,7 @@
   background: transparent;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
-}
-
+/* Dashboard Layout */
 .dashboard-container {
   display: flex;
   flex-direction: row;
@@ -29,11 +37,16 @@ body {
 }
 
 .container {
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 10px;
 }
-/*sidebar*/
 
+.main-content {
+  flex-grow: 1;
+  padding: 17px;
+}
+
+/* Sidebar */
 .sidebar {
   width: 13%;
   background-color: #e3f2fd;
@@ -42,10 +55,6 @@ body {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-}
-
-.nav-list-small {
-  display: none;
 }
 
 .nav-list {
@@ -77,22 +86,11 @@ body {
   border: 2px solid #00796b;
 }
 
-/* Dashboard*/
-
-.main-content {
-  flex-grow: 1;
-  padding: 17px;
+.nav-list-small {
+  display: none;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  margin-left: 230px;
-  position: fixed;
-}
-
+/* Dashboard Sections */
 .dashboard-sections {
   display: grid;
   grid-template-columns: repeat(2, 620px);
@@ -113,12 +111,9 @@ section {
   overflow-y: auto;
 }
 
-/* Patient List*/
-.patient-list-section {
-  position: relative;
-}
-
-.patient-list-section h2 {
+/* Patient List */
+.patient-list-section h2,
+.medicine-section h2 {
   position: sticky;
   width: 100%;
   top: -16px;
@@ -134,20 +129,6 @@ section {
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
-}
-
-.report {
-  color: #625e5e;
-  font-style: normal;
-  font-size: x-small;
-  text-decoration: none;
-}
-
-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #00796b;
 }
 
 .patient {
@@ -186,8 +167,20 @@ img {
   color: #fc0808b1;
 }
 
-/*Selected Person details*/
+.name-report {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.report {
+  color: #625e5e;
+  font-style: normal;
+  font-size: x-small;
+  text-decoration: none;
+}
+
+/* Selected Patient Details */
 .patient-details {
   display: flex;
   align-items: center;
@@ -206,21 +199,7 @@ img {
   border: 2px solid #00796b;
 }
 
-/*Medicine table*/
-.Medicine-section {
-  position: relative;
-}
-
-.Medicine-section h2 {
-  position: sticky;
-  width: 100%;
-  top: -16px;
-  z-index: 1;
-  background-color: #ffffff;
-  margin: 0;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-}
+/* Medicines Table */
 .medicines-table {
   width: 100%;
   table-layout: fixed;
@@ -233,7 +212,6 @@ img {
   text-align: left;
   border-bottom: 1px solid #ddd;
   word-wrap: break-word;
-  word-break: break-all;
   white-space: normal;
 }
 
@@ -250,40 +228,38 @@ img {
   color: #333;
 }
 
-/*Graph*/
-
-#line-chart1 {
+/* Graph Section */
+#line-chart {
   width: 460px;
   height: 226px;
 }
 
-/*Responsive Queries*/
-
+/* Responsive Styles */
 @media (max-width: 1304px) {
   .dashboard-sections {
     grid-template-columns: 1fr;
-    overflow-y: auto;
   }
 
   .sidebar {
     height: 100vh;
     width: 5%;
   }
+
   .nav-list {
     display: none;
   }
-  .nav-list-small {
-    display: block;
-  }
-  .logo-img {
-    display: none;
-  }
+
   .nav-list-small {
     display: flex;
     flex-direction: column;
     gap: 4rem;
     align-items: center;
   }
+
+  .logo-img {
+    display: none;
+  }
+
   i {
     cursor: pointer;
   }
@@ -292,10 +268,5 @@ img {
 @media (max-width: 720px) {
   .dashboard-sections {
     grid-template-columns: 1fr;
-    overflow-y: auto;
-  }
-
-  .sidebar {
-    height: 100vh;
   }
 }

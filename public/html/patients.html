@@ -7,8 +7,7 @@
     <title>MediSync-Patients Management</title>
     <link rel="stylesheet" href="../css/patients.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,7 +23,6 @@
                 <i class='bx bx-receipt'></i>
                 <i class='bx bx-log-out'></i>
             </div>
-
             <ul class="nav-list">
                 <li><a href="../html/index.html">Dashboard</a></li>
                 <li><a href="../html/patients.html">Patients</a></li>
@@ -33,12 +31,9 @@
             </ul>
         </aside>
 
-
-
         <!-- Main Content -->
         <main class="main-content">
             <h2>Patient Management</h2>
-
 
             <!-- Search Bar -->
             <div class="search-bar">
@@ -46,26 +41,14 @@
                 <button id="add-patient">Add Patient</button>
             </div>
 
-
-
-
-
-
             <!-- Patient List Section -->
             <section class="patient-list-section">
                 <div class="patient-list">
-                    <!-- Dynamic patient data -->
+                    <!-- Dynamic patient data will be loaded here -->
                 </div>
             </section>
         </main>
     </div>
-
-
-
-
-
-
-
 
     <!-- Modal for Adding a Patient -->
     <div id="patientFormModal" class="modal">
@@ -75,34 +58,22 @@
             <form id="patientForm" enctype="multipart/form-data">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
-
                 <label for="age">Age:</label>
                 <input type="number" id="age" name="age" required>
-
                 <label for="symptoms">Symptoms:</label>
                 <input type="text" id="symptoms" name="symptoms" required>
-
                 <label for="diagnosis">Diagnosis:</label>
                 <input type="text" id="diagnosis" name="diagnosis" required>
-
                 <label for="physician">Physician:</label>
-                <select id="physician" name="physician" required>
-                    <option value="">Select a Physician</option>
-                    <!-- Static list of doctors will be populated here -->
-                </select>
-
+                <select id="physician" name="physician" required></select>
                 <div class="form-group">
                     <label for="image">Patient Image:</label>
                     <input type="file" name="image" id="image" accept="image/*">
                 </div>
                 <button type="submit">Submit</button>
-
-
             </form>
         </div>
     </div>
-
-
 
     <!-- Modal for Medicines -->
     <div id="MedicineFormModal" class="modal">
@@ -118,7 +89,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Existing medicines will be populated dynamically -->
+                    <!-- Medicines will be dynamically populated -->
                 </tbody>
             </table>
             <div class="button-container">
@@ -127,12 +98,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 
     <script src="../script/patients.js"></script>
     <script src="../script/sidebar.js"></script>

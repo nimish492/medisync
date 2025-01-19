@@ -7,15 +7,10 @@
     <title>MediSync</title>
     <link rel="stylesheet" href="../css/style.css">
 
-
-
-
-    <!-- Chart.js -->
+    <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 </head>
 
 <body>
@@ -23,7 +18,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="../assets/logo.png" class="logo-img">
+                <img src="../assets/logo.png" class="logo-img" alt="Logo">
             </div>
             <div class="nav-list-small">
                 <i class='bx bx-home-alt-2'></i>
@@ -31,7 +26,6 @@
                 <i class='bx bx-receipt'></i>
                 <i class='bx bx-log-out'></i>
             </div>
-
 
             <ul class="nav-list">
                 <li><a href="../html/index.html">Dashboard</a></li>
@@ -41,57 +35,27 @@
             </ul>
         </aside>
 
-
-
-
-
-
-
-
-
-
+        <!-- Main Content -->
         <div class="container">
-
-
-
-
-            <!-- Dashboard Sections -->
             <div class="dashboard-sections">
                 <!-- Patient List Section -->
-
                 <section class="patient-list-section">
-
                     <h2>Patient List</h2>
-
-                    <div class="patient-list">
-
-
-                    </div>
-
+                    <div class="patient-list"></div>
                 </section>
 
-
-
-
-
-                <!-- selected patient Section -->
+                <!-- Patient Information Section -->
                 <section class="patient-section">
                     <h2>Patient Information</h2>
                     <div class="patient-details">
-                        <div class="details">
-
-                        </div>
+                        <div class="details"></div>
                     </div>
                 </section>
 
-
-
-
-
-                <!-- medicine Section -->
-                <section class="Medicine-section">
+                <!-- Medicines Section -->
+                <section class="medicine-section">
                     <h2>Medicines</h2>
-                    <div class="Medicine-details">
+                    <div class="medicine-details">
                         <table class="medicines-table">
                             <thead>
                                 <tr>
@@ -100,34 +64,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Medicines rows  -->
+                                <!-- Medicines rows -->
                             </tbody>
                         </table>
                     </div>
                 </section>
 
-
-
-
-
-
-
-
-
-                <!-- Graph -->
-                <section class="blood-analysis-section">
+                <!-- IV Fluid Monitoring Section -->
+                <section class="iv-monitoring-section">
                     <h2>IV Fluid Bag %</h2>
-                    <div class="chart-container1">
-                        <canvas id="line-chart1"></canvas>
+                    <div class="chart-container">
+                        <canvas id="line-chart"></canvas>
                     </div>
                 </section>
-
-
             </div>
-
         </div>
-
     </div>
+
     <script src="../script/sidebar.js"></script>
     <script src="../script/script.js"></script>
 </body>

@@ -83,13 +83,8 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.patient-list-section h2 {
-  color: #3f51b5;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 24px;
+  height: 410px;
+  overflow-y: auto;
 }
 
 #patient-search {
@@ -110,10 +105,6 @@ body {
   cursor: pointer;
   margin-bottom: 20px;
   font-size: 14px;
-}
-
-#addPatientBtn:hover {
-  background-color: #303f9f;
 }
 
 /* Patient List Styles */
@@ -152,17 +143,10 @@ body {
   color: #999999;
 }
 
-.status {
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.ongoing {
-  color: #4caf50;
-}
-
-.offgoing {
-  color: #fc0808b1;
+.name-report {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .report {
@@ -186,44 +170,34 @@ body {
 }
 
 /* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+#patientFormModal .modal-content,
+#MedicineFormModal .modal-content {
+  background-color: #fff;
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  border-radius: 15px;
-  width: 80%;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
 }
 
-.modal-actions {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.modal-actions button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 15px;
-}
-
-#delete-patient {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
+/* Close Button */
+#patientFormModal .close,
+#MedicineFormModal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
   font-weight: bold;
-  text-align: center;
+}
+
+#patientFormModal .close:hover,
+#patientFormModal .close:focus,
+#MedicineFormModal .close:hover,
+#MedicineFormModal .close:focus {
+  color: #000;
   text-decoration: none;
-  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .delete-patient,
@@ -234,45 +208,7 @@ body {
 }
 
 /* Modal Background */
-#patientFormModal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Modal Content */
-#patientFormModal .modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-  border-radius: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-}
-
-/* Close Button */
-#patientFormModal .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-#patientFormModal .close:hover,
-#patientFormModal .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
+#patientFormModal,
 #MedicineFormModal {
   display: none;
   position: fixed;
@@ -283,32 +219,6 @@ body {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Modal Content */
-#MedicineFormModal .modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  border: 1px solid #888;
-  width: 50%;
-  border-radius: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-}
-
-/* Close Button */
-#MedicineFormModal .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-#MedicineFormModal .close:hover,
-#MedicineFormModal .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 /* Form Container */
@@ -325,7 +235,6 @@ body {
 }
 
 #patientForm input[type="text"],
-#patientForm input[type="date"],
 #patientForm input[type="number"],
 #patientForm input[type="file"],
 #patientForm select {
@@ -339,31 +248,10 @@ body {
 }
 
 #patientForm input[type="text"]:focus,
-#patientForm input[type="date"]:focus,
 #patientForm input[type="number"]:focus,
 #patientForm input[type="file"]:focus {
   border-color: #00796b;
   outline: none;
-}
-
-/* Button Styles */
-#patientForm button[type="submit"],
-#patientForm button[type="button"] {
-  background-color: #00796b;
-  color: white;
-  padding: 12px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 20px;
-}
-
-#patientForm button[type="submit"]:hover,
-#patientForm button[type="button"]:hover {
-  background-color: #005f55;
-  transform: scale(1.05);
 }
 
 /* Table Styles */
@@ -420,26 +308,18 @@ button {
   color: rgba(255, 255, 255, 0.816);
   border-radius: 20px;
 }
-
-/* Input Fields */
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  font-size: 1rem;
+#patientForm button[type="submit"] {
+  background-color: #00796b;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
 }
 
-input[type="file"] {
-  margin-top: 10px;
-}
-
-input[type="text"]:focus {
-  border-color: #00796b;
-  outline: none;
-}
 /* Responsive Design */
 
 @media (max-width: 1304px) {
@@ -473,13 +353,12 @@ input[type="text"]:focus {
   .nav-list {
     display: none;
   }
-  .nav-list-small {
-    display: block;
-  }
+
   .logo-img {
     display: none;
   }
   .nav-list-small {
+    display: block;
     display: flex;
     flex-direction: column;
     gap: 4rem;
@@ -512,29 +391,25 @@ input[type="text"]:focus {
     font-size: 13px;
   }
 
-  #addMedicineButton {
-    width: 82px;
-    font-size: 0.8rem;
-  }
+  #addMedicineButton,
   #saveMedicinesButton {
     width: 82px;
     font-size: 0.8rem;
   }
 }
+
 @media (max-width: 600px) {
   .remove-medicine {
     width: 60px;
     font-size: 8px;
   }
 
-  #addMedicineButton {
-    width: 75px;
-    font-size: 11px;
-  }
+  #addMedicineButton,
   #saveMedicinesButton {
     width: 75px;
     font-size: 11px;
   }
+
   #MedicineFormModal .modal-content {
     width: 75%;
   }
