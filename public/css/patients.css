@@ -226,15 +226,11 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.delete-patient {
+.delete-patient,
+.remove-medicine {
   background-color: #6e0801;
   color: rgba(255, 255, 255, 0.816);
   border-radius: 20px;
-}
-
-#delete-patient:hover {
-  background-color: #e53935;
-  transform: scale(1.05);
 }
 
 /* Modal Background */
@@ -398,53 +394,31 @@ body {
   box-sizing: border-box;
 }
 
-#medicine-table .remove-medicine {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-#medicine-table .remove-medicine:hover {
-  background-color: #d32f2f;
-}
-
-.button-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
 /* Buttons */
 button {
-  background-color: #00796b;
   color: white;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  border-radius: 4px;
+  border-radius: 25px;
 }
 
-button:hover {
-  background-color: #004d40;
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
-
 #addMedicineButton {
-  background-color: #4caf50;
-}
-
-#addMedicineButton:hover {
-  background-color: #388e3c;
+  background-color: #022391;
+  color: rgba(255, 255, 255, 0.816);
+  border-radius: 20px;
 }
 
 #saveMedicinesButton {
-  background-color: #2196f3;
-}
-
-#saveMedicinesButton:hover {
-  background-color: #1976d2;
+  background-color: #016b5e;
+  color: rgba(255, 255, 255, 0.816);
+  border-radius: 20px;
 }
 
 /* Input Fields */
@@ -549,8 +523,8 @@ input[type="text"]:focus {
 }
 @media (max-width: 600px) {
   .remove-medicine {
-    width: 55px;
-    font-size: 10px;
+    width: 60px;
+    font-size: 8px;
   }
 
   #addMedicineButton {
