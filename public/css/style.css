@@ -188,13 +188,13 @@ img {
 
 /*Selected Person details*/
 
-.consultation-details {
+.patient-details {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.consultation-details .details {
+.patient-details .details {
   font-size: 14px;
   color: #333333;
 }
@@ -207,11 +207,11 @@ img {
 }
 
 /*Medicine table*/
-.blood-formula-section {
+.Medicine-section {
   position: relative;
 }
 
-.blood-formula-section h2 {
+.Medicine-section h2 {
   position: sticky;
   width: 100%;
   top: -16px;
