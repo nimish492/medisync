@@ -1,25 +1,19 @@
 /* General styles remain the same */
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+.my-scrollable-div {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  -ms-overflow-style: none;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+.my-scrollable-div::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #00796b;
-  border-radius: 10px;
+.my-scrollable-div::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 body {
   margin: 0;
   padding: 0;
@@ -283,6 +277,44 @@ body {
   cursor: pointer;
 }
 
+#MedicineFormModal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Content */
+#MedicineFormModal .modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
+
+/* Close Button */
+#MedicineFormModal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#MedicineFormModal .close:hover,
+#MedicineFormModal .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* Form Container */
 #patientForm {
   display: flex;
@@ -299,7 +331,8 @@ body {
 #patientForm input[type="text"],
 #patientForm input[type="date"],
 #patientForm input[type="number"],
-#patientForm input[type="file"] {
+#patientForm input[type="file"],
+#patientForm select {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -337,23 +370,102 @@ body {
   transform: scale(1.05);
 }
 
-/* Medicine Section */
-#medicineInputs .medicine {
+/* Table Styles */
+#medicine-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#medicine-table th,
+#medicine-table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+#medicine-table th {
+  background-color: #00796b;
+  color: white;
+}
+
+#medicine-table td input {
+  width: 100%;
+  padding: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#medicine-table .remove-medicine {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#medicine-table .remove-medicine:hover {
+  background-color: #d32f2f;
+}
+
+.button-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 15px;
+  flex-direction: row;
+  align-items: center;
+}
+/* Buttons */
+button {
+  background-color: #00796b;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
 }
 
-#medicineInputs .medicine label {
-  flex-basis: 100%;
+button:hover {
+  background-color: #004d40;
 }
 
-#medicineInputs .medicine input {
-  flex: auto;
-  min-width: calc(50% - 10px);
+#addMedicineButton {
+  background-color: #4caf50;
 }
 
+#addMedicineButton:hover {
+  background-color: #388e3c;
+}
+
+#saveMedicinesButton {
+  background-color: #2196f3;
+}
+
+#saveMedicinesButton:hover {
+  background-color: #1976d2;
+}
+
+/* Input Fields */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+}
+
+input[type="text"]:focus {
+  border-color: #00796b;
+  outline: none;
+}
 /* Responsive Design */
 
 @media (max-width: 1304px) {
@@ -402,7 +514,54 @@ body {
   i {
     cursor: pointer;
   }
-}
 
-@media (max-width: 720px) {
+  #MedicineFormModal {
+    width: 100%;
+  }
+
+  #medicine-table {
+    max-height: 200px;
+  }
+
+  #medicine-table th,
+  #medicine-table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  #medicine-table td input {
+    padding: 4px;
+    font-size: 10px;
+  }
+  .remove-medicine {
+    width: 80px;
+    font-size: 0.4rem;
+  }
+
+  #addMedicineButton {
+    width: 82px;
+    font-size: 0.8rem;
+  }
+  #saveMedicinesButton {
+    width: 82px;
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 600px) {
+  .remove-medicine {
+    width: 40px;
+    font-size: 0.4rem;
+  }
+
+  #addMedicineButton {
+    width: 75px;
+    font-size: 8px;
+  }
+  #saveMedicinesButton {
+    width: 75px;
+    font-size: 8px;
+  }
+  #MedicineFormModal .modal-content {
+    width: 75%;
+  }
 }

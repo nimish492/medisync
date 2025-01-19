@@ -86,61 +86,52 @@
                 <input type="text" id="diagnosis" name="diagnosis" required>
 
                 <label for="physician">Physician:</label>
-                <input type="text" id="physician" name="physician" required>
-
+                <select id="physician" name="physician" required>
+                    <option value="">Select a Physician</option>
+                    <!-- Static list of doctors will be populated here -->
+                </select>
 
                 <div class="form-group">
                     <label for="image">Patient Image:</label>
                     <input type="file" name="image" id="image" accept="image/*">
                 </div>
-
-
-
-
-                <!-- medicine input -->
-                <h3>Medicines</h3>
-                <div id="medicineInputs">
-                    <div class="medicine">
-                        <label for="medName">Name:</label>
-                        <input type="text" id="medName" name="medName[]" required>
-
-                        <label for="dosage">Dosage:</label>
-                        <input type="text" id="dosage" name="dosage[]" required>
-
-                        <label for="frequency">Frequency:</label>
-                        <input type="text" id="frequency" name="frequency[]" required>
-
-                        <label for="duration">Duration:</label>
-                        <input type="text" id="duration" name="duration[]" required>
-                    </div>
-                </div>
-                <button type="button" id="addMedicineButton">Add Another Medicine</button>
-
                 <button type="submit">Submit</button>
+
+
             </form>
         </div>
     </div>
 
 
 
-
-
-
-
-
-
-
-
-    <!-- Modal for Deleting a Patient -->
-    <div id="deletePatientModal" class="modal">
+    <!-- Modal for Medicines -->
+    <div id="MedicineFormModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeDeleteModal()">&times;</span>
-            <h2>Confirm Deletion</h2>
-            <p>Are you sure you want to delete this patient?</p>
-            <button id="confirm-delete">Yes, Delete</button>
-            <button onclick="closeDeleteModal()">Cancel</button>
+            <span class="close" onclick="closeMedicineModal()">&times;</span>
+            <h2>Medicines</h2>
+            <table id="medicine-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dosage</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Existing medicines will be populated dynamically -->
+                </tbody>
+            </table>
+
+            <button type="button" id="addMedicineButton">Add New Medicine</button>
+            <button type="submit" id="saveMedicinesButton">Save Medicines</button>
+
         </div>
     </div>
+
+
+
+
+
 
 
     <script src="../script/patients.js"></script>

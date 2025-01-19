@@ -1,10 +1,12 @@
 $(document).ready(function () {
+  let patients = [];
   /// Function to fetch and display patient list//////////////////////////////////////////////////////////////////////////////////////
   function fetchPatients() {
     $.ajax({
       url: "/api/patients",
       method: "GET",
-      success: function (patients) {
+      success: function (fetchedPatients) {
+        patients = fetchedPatients;
         $(".patient-list").empty();
 
         patients.forEach((patient) => {
@@ -30,6 +32,14 @@ $(document).ready(function () {
                         </div>
                     `;
           $(".patient-list").append(patientElement);
+        });
+
+        // Attach view medicines button click event
+        $(".patient").on("click", function (e) {
+          e.stopPropagation(); // Prevent triggering other events
+          const patientId = $(this).data("id");
+          const patient = patients.find((p) => p._id === patientId);
+          openMedicineModal(patient);
         });
 
         // Attach delete button click event
@@ -64,6 +74,44 @@ $(document).ready(function () {
   }
 
   fetchPatients();
+  //////////////////////////////////////////////////////
+  // Function to remove medicine
+  $(document).on("click", ".remove-medicine", function () {
+    const patientId = $(this).data("patient-id");
+    const medicineIndex = $(this).data("medicine-index");
+
+    const patient = patients.find((p) => p._id === patientId);
+    if (patient) {
+      if (medicineIndex === -1) {
+        // If it's a new row, remove it directly from the DOM
+        $(this).closest("tr").remove();
+      } else {
+        // Remove from the medicines array (UI)
+        patient.medicines.splice(medicineIndex, 1);
+
+        // Update the backend by sending the modified medicines array
+        $.ajax({
+          url: `/api/patients/${patient._id}/medicines`,
+          method: "PUT",
+          data: { medicines: patient.medicines },
+          success: function (response) {
+            const updatedPatient = response.patient;
+            const updatedPatientIndex = patients.findIndex(
+              (p) => p._id === updatedPatient._id
+            );
+            if (updatedPatientIndex !== -1) {
+              patients[updatedPatientIndex] = updatedPatient; // Update the local array
+            }
+            openMedicineModal(updatedPatient); // Refresh the modal with updated data
+          },
+          error: function (error) {
+            console.error("Error updating medicines:", error);
+            alert("Error removing medicine.");
+          },
+        });
+      }
+    }
+  });
 
   /// Search functionality/////////////////////////////////////////////////////////////////////////////////////////////////////////
   $("#patient-search").on("input", function () {
@@ -83,33 +131,32 @@ $(document).ready(function () {
     $("#patientFormModal").hide();
   };
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  $("#addMedicineButton").click(function () {
-    const newMedicine = `
-    <div class="medicine">
-        <label for="medName">Name:</label>
-        <input type="text" name="medName[]" required>
+  // Static list of doctors (example)
+  const doctors = [
+    { id: "doctor1", name: "Dr. Priya Gupta" },
+    { id: "doctor2", name: "Dr. Venkatesh Reddy" },
+    { id: "doctor3", name: "Dr. Sara Gill" },
+    { id: "doctor4", name: "Dr. Prakash Khurana" },
+    { id: "doctor5", name: "Dr. Diya Gulati" },
+  ];
 
-        <label for="dosage">Dosage:</label>
-        <input type="text" name="dosage[]" required>
+  // Function to populate the physician dropdown
+  function populatePhysicianDropdown() {
+    const physicianSelect = $("#physician");
+    physicianSelect.empty(); // Clear the existing options
 
-        <label for="frequency">Frequency:</label>
-        <input type="text" name="frequency[]" required>
+    // Add the default "Select a Physician" option
+    physicianSelect.append('<option value="">Select a Physician</option>');
 
-        <label for="duration">Duration:</label>
-        <input type="text" name="duration[]" required>
+    // Add each doctor as an option in the dropdown
+    doctors.forEach((doctor) => {
+      const option = `<option value="${doctor.id}">${doctor.name}</option>`;
+      physicianSelect.append(option);
+    });
+  }
 
-        <button type="button" class="removeMedicineButton">Remove</button>
-    
-    </div>`;
-
-    $("#medicineInputs").append(newMedicine);
-  });
-
-  // Delegate event for dynamically added "Remove" buttons
-  $("#medicineInputs").on("click", ".removeMedicineButton", function () {
-    $(this).closest(".medicine").remove();
-  });
+  // Call the function to populate the dropdown when the page loads
+  populatePhysicianDropdown();
 
   ///////// Handle form submission for adding a new patient////////////////////////////////////////////////////////
   $("#patientForm").on("submit", function (e) {
@@ -118,17 +165,16 @@ $(document).ready(function () {
     // Gather form data
     const formData = new FormData(this);
 
-    // Gather medicines data from the form
-    const medicines = [];
-    $("#medicine-table tbody tr").each(function () {
-      const medicine = {
-        name: $(this).find(".medicine-name").val(),
-        dosage: $(this).find(".medicine-dosage").val(),
-        frequency: $(this).find(".medicine-frequency").val(),
-        duration: $(this).find(".medicine-duration").val(),
-      };
-      medicines.push(medicine);
-    });
+    // Get the selected doctor's name instead of the id
+    const selectedDoctorId = $("#physician").val();
+    const selectedDoctor = doctors.find(
+      (doctor) => doctor.id === selectedDoctorId
+    );
+
+    // If a doctor is selected, add their name to the form data
+    if (selectedDoctor) {
+      formData.set("physician", selectedDoctor.name);
+    }
 
     $.ajax({
       url: "/api/patients",
@@ -140,7 +186,6 @@ $(document).ready(function () {
         alert("Patient added successfully!");
         fetchPatients();
         $("#patientForm")[0].reset();
-        $("#medicine-table tbody").empty();
         $("#patientFormModal").hide();
       },
       error: function (error) {
@@ -149,4 +194,80 @@ $(document).ready(function () {
       },
     });
   });
+
+  // Open the medicine modal for a specific patient
+  function openMedicineModal(patient) {
+    $("#MedicineFormModal").show();
+
+    // Populate the medicine table dynamically
+    const medicineTableBody = $("#medicine-table tbody");
+    medicineTableBody.empty(); // Clear previous medicines
+
+    // Add current medicines to the modal
+    patient.medicines.forEach((medicine, index) => {
+      const medicineRow = `
+        <tr>
+          <td><input type="text" class="medicine-name" value="${medicine.name}" data-index="${index}"></td>
+          <td><input type="text" class="medicine-dosage" value="${medicine.dosage}" data-index="${index}"></td>
+          <td>
+            <button class="remove-medicine" data-patient-id="${patient._id}" data-medicine-index="${index}">Remove</button>
+          </td>
+        </tr>
+      `;
+      medicineTableBody.append(medicineRow);
+    });
+
+    // Ensure that the "Add Medicine" button only adds one new row
+    $("#addMedicineButton")
+      .off("click")
+      .on("click", function () {
+        const newRow = `
+        <tr>
+          <td><input type="text" class="medicine-name" placeholder="Medicine Name"></td>
+          <td><input type="text" class="medicine-dosage" placeholder="Dosage"></td>
+          <td>
+            <button class="remove-medicine" data-patient-id="${patient._id}" data-medicine-index="-1">Remove</button>
+          </td>
+        </tr>
+      `;
+        medicineTableBody.append(newRow);
+      });
+
+    // Save medicines when clicked
+    $("#saveMedicinesButton").on("click", function () {
+      const updatedMedicines = [];
+
+      // Collect updated medicines from the modal fields
+      $("#medicine-table tbody tr").each(function () {
+        const name = $(this).find(".medicine-name").val();
+        const dosage = $(this).find(".medicine-dosage").val();
+
+        if (name && dosage) {
+          updatedMedicines.push({ name, dosage });
+        }
+      });
+
+      // Send updated medicines to the server
+      $.ajax({
+        url: `/api/patients/${patient._id}/medicines`,
+        method: "PUT",
+        data: { medicines: updatedMedicines },
+        success: function () {
+          fetchPatients();
+          closeMedicineModal(); // Close the modal after saving
+        },
+        error: function (error) {
+          console.error("Error updating medicines:", error);
+          alert("Error updating medicines.");
+        },
+      });
+    });
+  }
+
+  // Close the medicine modal
+  window.closeMedicineModal = function () {
+    $("#MedicineFormModal").hide();
+  };
+
+  fetchPatients(); // Initially load the patients
 });

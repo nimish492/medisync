@@ -66,8 +66,7 @@ $(document).ready(function () {
                                 <tr>
                                     <th>Name</th>
                                     <th>Dosage</th>
-                                    <th>Frequency</th>
-                                    <th>Duration</th>
+                                  
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,8 +76,7 @@ $(document).ready(function () {
                             <tr>
                                 <td>${medicine.name}</td>
                                 <td>${medicine.dosage}</td>
-                                <td>${medicine.frequency}</td>
-                                <td>${medicine.duration}</td>
+                           
                             </tr>
                         `;
           });

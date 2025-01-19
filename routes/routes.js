@@ -36,12 +36,6 @@ router.post("/patients", upload.single("image"), async (req, res) => {
       physician: req.body.physician,
       status: req.body.status || "Off drip",
       image: req.file ? `assets/${req.file.filename}` : "assets/default.png",
-      medicines: req.body.medName.map((name, index) => ({
-        name,
-        dosage: req.body.dosage[index],
-        frequency: req.body.frequency[index],
-        duration: req.body.duration[index],
-      })),
     };
 
     const newPatient = new Patient(newPatientData);
@@ -109,6 +103,32 @@ router.patch("/patients/:id", async (req, res) => {
   } catch (error) {
     console.error("Error updating patient:", error);
     res.status(500).send({ error: "Internal server error" });
+  }
+});
+
+// Get medicines for a specific patient
+router.put("/patients/:id/medicines", async (req, res) => {
+  try {
+    const patientId = req.params.id;
+    const updatedMedicines = req.body.medicines;
+
+    // Find the patient by ID and update their medicines
+    const patient = await Patient.findByIdAndUpdate(
+      patientId,
+      { medicines: updatedMedicines },
+      { new: true } // This option ensures that the updated patient document is returned
+    );
+
+    if (!patient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Medicines updated successfully!", patient });
+  } catch (error) {
+    console.error("Error updating medicines:", error);
+    res.status(500).json({ message: "Error updating medicines" });
   }
 });
 
