@@ -531,11 +531,11 @@ input[type="text"]:focus {
 
   #medicine-table td input {
     padding: 4px;
-    font-size: 10px;
+    font-size: 13px;
   }
   .remove-medicine {
     width: 80px;
-    font-size: 0.4rem;
+    font-size: 13px;
   }
 
   #addMedicineButton {
@@ -549,17 +549,17 @@ input[type="text"]:focus {
 }
 @media (max-width: 600px) {
   .remove-medicine {
-    width: 40px;
-    font-size: 0.4rem;
+    width: 55px;
+    font-size: 10px;
   }
 
   #addMedicineButton {
     width: 75px;
-    font-size: 8px;
+    font-size: 11px;
   }
   #saveMedicinesButton {
     width: 75px;
-    font-size: 8px;
+    font-size: 11px;
   }
   #MedicineFormModal .modal-content {
     width: 75%;
