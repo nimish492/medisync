@@ -1,4 +1,4 @@
-/* General styles remain the same */
+/* General styles */
 .my-scrollable-div {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -76,24 +76,7 @@ body {
   border: 2px solid #00796b;
 }
 
-.nav-list {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-}
-
-.nav-list li {
-  margin-bottom: 20px;
-}
-
-.nav-list a {
-  text-decoration: none;
-  color: #00796b;
-  font-weight: bold;
-  display: block;
-  text-align: center;
-}
-
+/* Main Content */
 .main-content {
   flex-grow: 1;
   padding: 20px;
@@ -111,19 +94,15 @@ body {
   box-sizing: border-box;
 }
 
-/* Updated Patient List Section */
+/* Form and Bill Section Division */
 .division {
   display: flex;
   flex-direction: row;
   gap: 2rem;
 }
 
-.scroll {
-  overflow: auto;
-  height: 450px;
-}
-
-.patient-list-section {
+/* Form Section  */
+.form-section {
   background-color: #f5f7fa;
   padding: 20px;
   display: flex;
@@ -133,31 +112,41 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.patient-list-section h2 {
+.form-section h2 {
   color: #3f51b5;
   margin-bottom: 20px;
   text-align: center;
   font-size: 24px;
 }
+
+/* Bill Section  */
 .bill-section {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
   width: 50%;
+  height: 465px;
   max-height: 100%;
   position: relative;
   overflow: auto;
 }
 
-#billing-data {
-  max-height: 225px;
-  overflow-y: auto;
+.bill-section h2 {
+  color: #3f51b5;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
 }
 
 #billing-table-container {
   margin-top: 20px;
   position: relative;
+}
+
+#billing-data {
+  max-height: 225px;
+  overflow-y: auto;
 }
 
 #billing-table {
@@ -176,13 +165,6 @@ body {
   background-color: #f2f2f2;
 }
 
-.bill-section h2 {
-  color: #3f51b5;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 24px;
-}
-
 /* Dropdown styles */
 .dropdown-list {
   position: absolute;
@@ -196,7 +178,7 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 0;
   margin-top: 5px;
-  display: none; /* Hidden by default */
+  display: none;
 }
 
 .dropdown-list li {
@@ -217,10 +199,10 @@ body {
 }
 
 .dropdown-list li + li {
-  border-top: 1px solid #e0e0e0; /* Add a separator line between items */
+  border-top: 1px solid #e0e0e0;
 }
 
-/* General Form Styles */
+/* Patient Detail Form */
 
 .patient-details-form {
   overflow-y: auto;
@@ -310,7 +292,8 @@ body {
 }
 
 @media (max-width: 1304px) {
-  .division {
+  .division,
+  .medicine-item {
     flex-direction: column;
   }
 
@@ -318,26 +301,28 @@ body {
     height: 100vh;
     width: 5%;
   }
-  .nav-list {
-    display: none;
-  }
-  .nav-list-small {
-    display: block;
-  }
+
+  .nav-list,
   .logo-img {
     display: none;
   }
+
+  .nav-list-small {
+    display: block;
+  }
+
   .nav-list-small {
     display: flex;
     flex-direction: column;
     gap: 4rem;
     align-items: center;
   }
+
   i {
     cursor: pointer;
   }
 
-  .patient-list-section {
+  .form-section {
     min-width: 200px;
   }
 
@@ -355,16 +340,13 @@ body {
   .patient-info {
     text-align: center;
   }
+
   #billing-data {
     height: 11rem;
   }
-  .bill-section {
-    width: 100%;
-  }
+
+  .bill-section,
   #patient-search {
     width: 100%;
-  }
-  .medicine-item {
-    flex-direction: column;
   }
 }

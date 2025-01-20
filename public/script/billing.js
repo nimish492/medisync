@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // Handle patient search input
   $("#patient-search").on("input", function () {
     const searchTerm = $(this).val();
 
@@ -9,7 +10,7 @@ $(document).ready(function () {
         data: { q: searchTerm },
         success: function (data) {
           const dropdownList = $("#dropdown-list");
-          dropdownList.empty(); // Clear previous results
+          dropdownList.empty();
 
           if (data.length > 0) {
             data.forEach(function (patient) {
@@ -17,9 +18,9 @@ $(document).ready(function () {
                 `<li data-id="${patient._id}">${patient.name}</li>`
               );
             });
-            dropdownList.show(); // Show the dropdown
+            dropdownList.show();
           } else {
-            dropdownList.hide(); // Hide dropdown if no results
+            dropdownList.hide();
           }
         },
         error: function () {
@@ -27,7 +28,7 @@ $(document).ready(function () {
         },
       });
     } else {
-      $("#dropdown-list").hide(); // Hide dropdown if input is empty
+      $("#dropdown-list").hide();
     }
   });
 
@@ -46,65 +47,59 @@ $(document).ready(function () {
     fetchPatientDetails(patientId);
   });
 
+  // Fetch and display patient details
   function fetchPatientDetails(patientId) {
     $.ajax({
       url: `/api/patients/${patientId}`,
       method: "GET",
       success: function (patient) {
-        // Render the forms for the selected patient
-        $("#patient-details-section").html(`
-                    <div class="patient-details-form">
-                        <div class="scroll">
-                            <form id="hospital-charges-form">
-                                <h3>Hospitalization Charges</h3>
-                                <label for="room-type">Room Type:</label>
-                                <select id="room-type">
-                                   <option value="general">General</option>
-                                    <option value="private">Private</option>
-                                    <option value="deluxe">Deluxe</option>
-                                </select>
+        $("#form-details-section").html(`
+          <div class="patient-details-form">
+            <form id="hospital-charges-form">
+              <h3>Hospitalization Charges</h3>
+              <label for="room-type">Room Type:</label>
+              <select id="room-type">
+                <option value="general">General</option>
+                <option value="private">Private</option>
+                <option value="deluxe">Deluxe</option>
+              </select>
 
-                                <label for="no-of-days">Number of Days:</label>
-                                <input type="number" id="no-of-days" value="${
-                                  patient.hospitalCharges
-                                    ? patient.hospitalCharges.noOfDays || 0
-                                    : 0
-                                }" required>
-                            </form>
+              <label for="no-of-days">Number of Days:</label>
+              <input type="number" id="no-of-days" value="${
+                patient.hospitalCharges?.noOfDays || 0
+              }" required>
+            </form>
 
-                            <form id="medicines-charges-form">
-                                <h3>Medicines Charges</h3>
-                                <div id="medicines-list"></div>
-                            </form>
-                            <button id="save-hospital-charges">Generate Bill</button>
-                        </div>
-                    </div>
-                `);
+            <form id="medicines-charges-form">
+              <h3>Medicines Charges</h3>
+              <div id="medicines-list"></div>
+            </form>
+            <button id="save-hospital-charges">Generate Bill</button>
+          </div>
+        `);
 
-        // Populate medicines form
         const medicinesList = $("#medicines-list");
         patient.medicines.forEach((medicine) => {
           medicinesList.append(`
-                        <div class="medicine-item">
-                            <label>Medicine Name:</label>
-                            <input type="text" class="medicine-name" value="${
-                              medicine.name
-                            }">
+            <div class="medicine-item">
+              <label>Medicine Name:</label>
+              <input type="text" class="medicine-name" value="${medicine.name}">
 
-                            <label>Quantity:</label>
-                            <input type="number" class="medicine-qty" value="${
-                              medicine.qty || ""
-                            }" required>
-                        </div>
-                    `);
+              <label>Quantity:</label>
+              <input type="number" class="medicine-qty" value="${
+                medicine.qty || ""
+              }" required>
+            </div>
+          `);
         });
 
-        $("#billing-details").html(` <h3>Billing Details</h3>
-                            <p id="patient-id">ID: ${patient._id}</p>
-                            <p id="patient-name">Name: ${patient.name}</p>
-                            <p id="patient-age">Age:${patient.age}</p>
-                            <p id="patient-physician">Physician:${patient.physician}</p>`);
-        // Update billing section with patient details
+        $("#billing-details").html(`
+          <h3>Billing Details</h3>
+          <p>ID: ${patient._id}</p>
+          <p>Name: ${patient.name}</p>
+          <p>Age: ${patient.age}</p>
+          <p>Physician: ${patient.physician}</p>
+        `);
       },
       error: function () {
         console.error("Error fetching patient details.");
@@ -112,7 +107,7 @@ $(document).ready(function () {
     });
   }
 
-  // Save form data
+  // Save hospital charges
   $(document).on("click", "#save-hospital-charges", function () {
     const hospitalCharges = {
       roomType: $("#room-type").val(),
@@ -121,6 +116,7 @@ $(document).ready(function () {
     updatePatientDetail("hospitalCharges", hospitalCharges);
   });
 
+  // Save medicines charges
   $(document).on("click", "#save-medicines-charges", function () {
     const medicines = [];
     $("#medicines-list .medicine-item").each(function () {
@@ -133,14 +129,15 @@ $(document).ready(function () {
     updatePatientDetail("medicines", medicines);
   });
 
+  // Update patient detail in database
   function updatePatientDetail(field, value) {
-    const patientId = $("#dropdown-list li").data("id"); // Get current patient ID
+    const patientId = $("#dropdown-list li").data("id");
     $.ajax({
       url: `/api/patients/${patientId}`,
       method: "PATCH",
       data: { [field]: value },
       success: function () {
-        generateBill(); // Update the bill after saving
+        generateBill();
       },
       error: function () {
         console.error("Error updating patient details.");
@@ -148,6 +145,7 @@ $(document).ready(function () {
     });
   }
 
+  // Generate bill and update the billing table
   function generateBill() {
     const hospitalCharges = {
       roomType: $("#room-type").val(),
@@ -163,7 +161,6 @@ $(document).ready(function () {
       }
     });
 
-    // Calculate costs
     let roomPrice = 0;
     switch (hospitalCharges.roomType) {
       case "deluxe":
@@ -178,56 +175,53 @@ $(document).ready(function () {
     }
 
     const totalHospitalCharges = roomPrice * hospitalCharges.noOfDays;
-
-    const medicinePricePerUnit = 50; // Assuming each unit of medicine costs 50
+    const medicinePricePerUnit = 50;
     const totalMedicinesCharges = medicines.reduce(
       (total, medicine) => total + medicine.qty * medicinePricePerUnit,
       0
     );
 
-    // Update billing table
     $("#billing-data").html(`
-      <div class="billing-print">
-                            <table id="billing-table">
-                                <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Details</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                <td>Hospital Charges</td>
-                <td>Room Type: ${
-                  hospitalCharges.roomType
-                }, No. of Days: ${hospitalCharges.noOfDays}</td>
-                <td>${totalHospitalCharges}</td>
-            </tr>
-            <tr>
-                <td>Medicines Charges</td>
-                <td>${medicines
-                  .map((medicine) => `${medicine.name}: ${medicine.qty} units`)
-                  .join(", ")}</td>
-                <td>${totalMedicinesCharges}</td>
-            </tr>
-            <tr>
-                <td><strong>Total</strong></td>
-                <td></td>
-                <td><strong>${
-                  totalHospitalCharges + totalMedicinesCharges
-                }</strong></td>
-            </tr>
-                                </tbody>
-                                
-                            </table>
-            </div>
-        `);
+     <div class="billing-print">
+      <table id="billing-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Details</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hospital Charges</td>
+            <td>Room Type: ${
+              hospitalCharges.roomType
+            }, No. of Days: ${hospitalCharges.noOfDays}</td>
+            <td>${totalHospitalCharges}</td>
+          </tr>
+          <tr>
+            <td>Medicines Charges</td>
+            <td>${medicines
+              .map((medicine) => `${medicine.name}: ${medicine.qty} units`)
+              .join(", ")}</td>
+            <td>${totalMedicinesCharges}</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td><strong>${
+              totalHospitalCharges + totalMedicinesCharges
+            }</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    `);
   }
 
-  // Generate and print the bill when button is clicked
+  // Print the bill
   $(document).on("click", "#print-bill-btn", function () {
-    const billSection = $("#billing"); // Change this line
+    const billSection = $("#billing");
     const opt = {
       margin: 1,
       filename: "patient-bill.pdf",

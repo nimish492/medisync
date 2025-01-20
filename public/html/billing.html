@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediSync-Billing</title>
+    <title>MediSync Billing</title>
     <link rel="stylesheet" href="../css/billing.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,7 +25,6 @@
                 <i class='bx bx-receipt'></i>
                 <i class='bx bx-log-out'></i>
             </div>
-
             <ul class="nav-list">
                 <li><a href="../html/index.html">Dashboard</a></li>
                 <li><a href="../html/patients.html">Patients</a></li>
@@ -48,25 +46,24 @@
 
                 <!-- Division for Patient Details and Billing -->
                 <div class="division">
-                    <!-- Patient Forms Section -->
-                    <section class="patient-list-section" id="patient-details-section">
+                    <!-- Forms Section -->
+                    <section class="form-section" id="form-details-section">
                         <!-- Forms will be dynamically inserted here -->
                     </section>
 
                     <!-- Bill Section -->
-                    <section class="bill-section" id="bill-section" style="height:465px;">
+                    <section class="bill-section" id="bill-section">
                         <div id="billing-table-container">
                             <div id="billing">
                                 <div id="billing-details"></div>
                                 <div id="billing-data"></div>
-
                             </div>
                             <button id="print-bill-btn">Print Bill</button>
                         </div>
                     </section>
                 </div>
+            </div>
         </main>
-    </div>
     </div>
     <script src="../script/billing.js"></script>
     <script src="../script/sidebar.js"></script>
