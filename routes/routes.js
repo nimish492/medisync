@@ -87,7 +87,27 @@ router.get("/patients/:id", async (req, res) => {
   }
 });
 
-// Get medicines for a specific patient
+router.patch("/patients/:id", async (req, res) => {
+  const patientId = req.params.id;
+  const updateData = req.body;
+
+  try {
+    const result = await Patient.findByIdAndUpdate(
+      patientId,
+      { $set: updateData },
+      { new: true }
+    );
+    if (!result) {
+      return res.status(404).send({ error: "Patient not found" });
+    }
+    res.send(result);
+  } catch (error) {
+    console.error("Error updating patient:", error);
+    res.status(500).send({ error: "Internal server error" });
+  }
+});
+
+///////////////medicines routes//////////////////////
 router.put("/patients/:id/medicines", isAdmin, async (req, res) => {
   try {
     const patientId = req.params.id;
