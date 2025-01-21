@@ -64,8 +64,12 @@ $(document).ready(function () {
         fetchPatients();
       },
       error: function (error) {
-        console.error("Error deleting patient:", error);
-        alert("Error deleting patient.");
+        if (error.status === 403) {
+          alert(error.responseJSON.error);
+        } else {
+          console.error("Error deleting patient:", error);
+          alert("Error deleting patient.");
+        }
       },
     });
   }
@@ -96,8 +100,12 @@ $(document).ready(function () {
             openMedicineModal(updatedPatient);
           },
           error: function (error) {
-            console.error("Error updating medicines:", error);
-            alert("Error removing medicine.");
+            if (error.status === 403) {
+              alert(error.responseJSON.error);
+            } else {
+              console.error("Error deleting patient:", error);
+              alert("Error deleting patient.");
+            }
           },
         });
       }
@@ -162,8 +170,12 @@ $(document).ready(function () {
         $("#patientFormModal").hide();
       },
       error: function (error) {
-        console.error("Error adding patient:", error);
-        alert("Error adding patient.");
+        if (error.status === 403) {
+          alert(error.responseJSON.error);
+        } else {
+          console.error("Error adding patient:", error);
+          alert("Error adding patient.");
+        }
       },
     });
   });
@@ -221,8 +233,12 @@ $(document).ready(function () {
           closeMedicineModal();
         },
         error: function (error) {
-          console.error("Error updating medicines:", error);
-          alert("Error updating medicines.");
+          if (error.status === 403) {
+            alert(error.responseJSON.error);
+          } else {
+            console.error("Error updating medicines:", error);
+            alert("Error updating medicines.");
+          }
         },
       });
     });

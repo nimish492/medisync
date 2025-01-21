@@ -1,7 +1,7 @@
+// models/fulluser.js
 const mongoose = require("mongoose");
 
-// Define the User schema
-const userSchema = new mongoose.Schema({
+const adminUserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// No need for pre-save hashing or password comparison method
-const User = mongoose.model("User", userSchema, "users");
+// Create a model for full users
+const AdminUser = mongoose.model("AdminUser", adminUserSchema, "adminusers");
 
-module.exports = User;
+module.exports = AdminUser;

@@ -3,8 +3,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const session = require("express-session");
-const User = require("./models/user"); // Ensure you have a User model
-const routes = require("./routes/routes"); // Import routes from /routes/routes
+const full = require("./models/adminUser");
+const routes = require("./routes/routes");
+const readonly = require("./models/readOnlyUsers");
+const { isAuthenticated } = require("./middlewares/authentication");
 
 const app = express();
 
@@ -43,18 +45,26 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body; // Correct way to extract form data
 
   // Find user by username
-  const user = await User.findOne({ username });
+  let user = await full.findOne({ username });
   if (!user) {
-    return res.status(401).send("Invalid credentials");
+    // If no full access user, check for read-only users
+    user = await readonly.findOne({ username });
+    if (!user) {
+      return res.status(401).send("Invalid credentials");
+    }
   }
-
   // Check if the password matches (direct comparison with plain text password)
   if (password !== user.password) {
     return res.status(401).send("Invalid credentials");
   }
 
   // Store user info in session
-  req.session.user = user;
+  if (user.constructor.modelName === "AdminUser") {
+    req.session.user = { username: user.username, role: "readWrite" };
+  } else {
+    req.session.user = { username: user.username, role: "read" };
+  }
+
   res.redirect("/index"); // Redirect to the protected page after successful login
 });
 
@@ -68,16 +78,6 @@ app.get("/logout", (req, res) => {
   });
 });
 
-// Protect routes to ensure only authenticated users can access them
-function isAuthenticated(req, res, next) {
-  if (req.session.user) {
-    return next();
-  }
-  res.redirect("/"); // Redirect to login if user is not authenticated
-}
-
-// Include the routes from /routes/routes.js
-// All routes defined in /routes/routes.js will be protected by the isAuthenticated middleware
 app.use("/api", isAuthenticated, routes);
 
 // Serve the protected pages

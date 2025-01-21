@@ -3,6 +3,7 @@ const router = express.Router();
 const Patient = require("../models/patient");
 const multer = require("multer");
 const path = require("path");
+const { isAdmin } = require("../middlewares/adminCheck");
 
 // Setup multer for file upload////////////////////////////////////////////////////////////////////////////
 const storage = multer.diskStorage({
@@ -26,7 +27,7 @@ router.get("/patients", async (req, res) => {
 });
 
 // Add a new patient////////////////////////////////////////////////////////////////////////
-router.post("/patients", upload.single("image"), async (req, res) => {
+router.post("/patients", upload.single("image"), isAdmin, async (req, res) => {
   try {
     const newPatientData = {
       name: req.body.name,
@@ -47,7 +48,7 @@ router.post("/patients", upload.single("image"), async (req, res) => {
 });
 
 // Delete a patient//////////////////////////////////////////////////////
-router.delete("/patients/:id", async (req, res) => {
+router.delete("/patients/:id", isAdmin, async (req, res) => {
   try {
     const result = await Patient.findByIdAndDelete(req.params.id);
     if (result) {
@@ -86,28 +87,8 @@ router.get("/patients/:id", async (req, res) => {
   }
 });
 
-router.patch("/patients/:id", async (req, res) => {
-  const patientId = req.params.id;
-  const updateData = req.body;
-
-  try {
-    const result = await Patient.findByIdAndUpdate(
-      patientId,
-      { $set: updateData },
-      { new: true }
-    );
-    if (!result) {
-      return res.status(404).send({ error: "Patient not found" });
-    }
-    res.send(result);
-  } catch (error) {
-    console.error("Error updating patient:", error);
-    res.status(500).send({ error: "Internal server error" });
-  }
-});
-
 // Get medicines for a specific patient
-router.put("/patients/:id/medicines", async (req, res) => {
+router.put("/patients/:id/medicines", isAdmin, async (req, res) => {
   try {
     const patientId = req.params.id;
     const updatedMedicines = req.body.medicines;

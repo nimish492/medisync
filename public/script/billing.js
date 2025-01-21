@@ -222,12 +222,19 @@ $(document).ready(function () {
   // Print the bill
   $(document).on("click", "#print-bill-btn", function () {
     const billSection = $("#billing");
+
     const opt = {
       margin: 1,
       filename: "patient-bill.pdf",
       image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      html2canvas: { scale: 4 },
+      jsPDF: {
+        unit: "in",
+        format: "a4",
+        orientation: "portrait",
+        putOnlyUsedFonts: true,
+        fontSize: 1,
+      },
     };
     html2pdf().from(billSection[0]).set(opt).save();
   });
