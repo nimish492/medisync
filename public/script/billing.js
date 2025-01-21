@@ -83,7 +83,9 @@ $(document).ready(function () {
           medicinesList.append(`
             <div class="medicine-item">
               <label>Medicine Name:</label>
-              <input type="text" class="medicine-name" value="${medicine.name}">
+              <input type="text" class="medicine-name" value="${
+                medicine.name
+              }" readonly>
 
               <label>Quantity:</label>
               <input type="number" class="medicine-qty" value="${
