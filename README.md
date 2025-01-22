@@ -1,6 +1,6 @@
 # MediSync - Patient Management System
 <img src="public/assets/logo-removebg-preview.png" alt="logo" width="200" height="200"/>
-MediSync is a comprehensive patient management system that helps healthcare providers manage patient data, track medicines, generate bills, and monitor IV fluid levels in real time. Built with a robust back-end using Node.js and MongoDB, and a dynamic front-end with HTML, CSS, and JavaScript, this project integrates with IoT devices for fluid monitoring and has real-time updates for an improved healthcare experience.
+MediSync is a comprehensive patient management system that helps healthcare providers manage patient data, track medicines, generate bills, and monitor IV fluid levels in real time. Built with a robust back-end using Node.js and MongoDB, and a dynamic front-end with HTML, CSS, and JavaScript, this project can integrate with IoT devices for fluid monitoring and can provide real-time updates for an improved healthcare experience.
 
 ## Table of Contents
 
@@ -60,7 +60,7 @@ MediSync is a comprehensive patient management system that helps healthcare prov
    npm install
    ```
 
-4. Set up your MongoDB URI in the `.env` file (if required) or directly in the `server.js` file.
+4. Set up your MongoDB URI in the required `.env` file.
 
 5. Start the server:
 
