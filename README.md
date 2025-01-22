@@ -1,6 +1,7 @@
 # MediSync - Patient Management System
+
 <img src="public/assets/logo-removebg-preview.png" alt="logo" width="200" height="200"/>
-MediSync is a comprehensive patient management system that helps healthcare providers manage patient data, track medicines, generate bills, and monitor IV fluid levels in real time. Built with a robust back-end using Node.js and MongoDB, and a dynamic front-end with HTML, CSS, and JavaScript, this project integrates with IoT devices for fluid monitoring and has real-time updates for an improved healthcare experience.
+MediSync is a comprehensive patient management system that helps healthcare providers manage patient data, track medicines, generate bills, and monitor IV fluid levels in real time. Built with a robust back-end using Node.js and MongoDB, and a dynamic front-end with HTML, CSS, and JavaScript, this project can integrate with IoT devices for fluid monitoring and can provide real-time updates for an improved healthcare experience.
 
 ## Table of Contents
 
@@ -60,7 +61,7 @@ MediSync is a comprehensive patient management system that helps healthcare prov
    npm install
    ```
 
-4. Set up your MongoDB URI in the `.env` file (if required) or directly in the `server.js` file.
+4. Set up your MongoDB URI in the required `.env` file.
 
 5. Start the server:
 
@@ -109,11 +110,11 @@ MediSync is a comprehensive patient management system that helps healthcare prov
 
 ## Screenshots/Demo
 
-![Dashboard](https://drive.google.com/file/d/1IVvyxtpZnOyXW7rf0-UNJXAwXRC2W6KA/view?usp=sharing)
+<img src="public/assets/Screenshot 2025-01-22 031323.png" alt="logo" width="800" height="400"/>
 _Dashboard showing patient details and IV fluid monitoring._
 
-You can also explore the demo here: [Live Demo](https://medisync-69xx.onrender.com/)
-Find Out Credentials here: https://docs.google.com/document/d/1KG0wNcd6NASyJgpRG2vS0gN5xddWxgZlh3Ih0yoyzg8/edit?usp=drive_link
+_You can also explore the demo here: [Live Demo](https://medisync-69xx.onrender.com/)_
+_Find Out Credentials [here](https://docs.google.com/document/d/1KG0wNcd6NASyJgpRG2vS0gN5xddWxgZlh3Ih0yoyzg8/edit?usp=drive_link)_
 
 ## Usage Examples
 
