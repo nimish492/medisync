@@ -7,12 +7,12 @@ const full = require("./models/adminUser");
 const routes = require("./routes/routes");
 const readonly = require("./models/readOnlyUsers");
 const { isAuthenticated } = require("./middlewares/authentication");
+require("dotenv").config();
 
 const app = express();
 
 // MongoDB Atlas connection
-const uri =
-  "mongodb+srv://rajeshgupta01457:3tlFFJBy1uEJiT2r@cluster0.emtam.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGODB_URI;
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"))
@@ -93,7 +93,8 @@ app.get("/billing", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "html", "billing.html"));
 });
 
+const port = process.env.PORT || 3000;
 // Start the server
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
