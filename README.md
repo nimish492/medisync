@@ -109,7 +109,7 @@ MediSync is a comprehensive patient management system that helps healthcare prov
 
 ## Screenshots/Demo
 
-<img src="public/assets/Screenshot 2025-01-22 031323.png" alt="logo" width="600" height="400"/>
+<img src="public/assets/Screenshot 2025-01-22 031323.png" alt="logo" width="800" height="400"/>
 _Dashboard showing patient details and IV fluid monitoring._
 
 You can also explore the demo here: [Live Demo](https://medisync-69xx.onrender.com/)
