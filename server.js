@@ -2,14 +2,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
+const { Server } = require("socket.io");
 const session = require("express-session");
 const full = require("./models/adminUser");
 const routes = require("./routes/routes");
+const http = require("http");
+const socketIo = require("socket.io");
 const readonly = require("./models/readOnlyUsers");
 const { isAuthenticated } = require("./middlewares/authentication");
 require("dotenv").config();
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
 // MongoDB Atlas connection
 const uri = process.env.MONGODB_URI;
@@ -93,8 +98,26 @@ app.get("/billing", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "html", "billing.html"));
 });
 
+// Real-time logic
+io.on("connection", (socket) => {
+  socket.on("patient-added", (newPatient) => {
+    io.emit("patient-added", newPatient);
+  });
+
+  socket.on("patient-deleted", (patientId) => {
+    io.emit("patient-deleted", patientId);
+  });
+
+  socket.on("medicines-updated", (updatedPatient) => {
+    io.emit("medicines-updated", updatedPatient);
+  });
+
+  socket.on("disconnect", () => {});
+});
+
 const port = process.env.PORT || 3000;
 // Start the server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
+  console.log("Socket.IO server is up and running.");
 });

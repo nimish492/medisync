@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  const socket = io();
+
   let patients = [];
   const doctors = [
     { id: 1, name: "Dr. Priya Gupta" },
@@ -62,6 +64,7 @@ $(document).ready(function () {
       success: function () {
         alert("Patient deleted successfully");
         fetchPatients();
+        socket.emit("patient-deleted", patientId);
       },
       error: function (error) {
         if (error.status === 403) {
@@ -150,24 +153,24 @@ $(document).ready(function () {
     const formData = new FormData(this);
     const selectedDoctorId = $("#physician").val();
     const selectedDoctor = doctors.find(
-      (doctor) => doctor.id === selectedDoctorId
+      (doctor) => doctor.id === parseInt(selectedDoctorId)
     );
 
     if (selectedDoctor) {
       formData.set("physician", selectedDoctor.name);
     }
-
     $.ajax({
       url: "/api/patients",
       method: "POST",
       data: formData,
       contentType: false,
       processData: false,
-      success: function () {
+      success: function (newPatient) {
         alert("Patient added successfully!");
         fetchPatients();
         $("#patientForm")[0].reset();
         $("#patientFormModal").hide();
+        socket.emit("patient-added", newPatient);
       },
       error: function (error) {
         if (error.status === 403) {
@@ -231,6 +234,10 @@ $(document).ready(function () {
         success: function () {
           fetchPatients();
           closeMedicineModal();
+          socket.emit("medicines-updated", {
+            _id: patient._id,
+            medicines: updatedMedicines,
+          });
         },
         error: function (error) {
           if (error.status === 403) {
@@ -249,5 +256,23 @@ $(document).ready(function () {
     $("#MedicineFormModal").hide();
   };
 
-  fetchPatients(); // Initial fetch
+  fetchPatients();
+
+  // Socket events
+  socket.on("patient-added", function (newPatient) {
+    patients.push(newPatient);
+    fetchPatients();
+  });
+
+  socket.on("patient-deleted", function (patientId) {
+    patients = patients.filter((p) => p._id !== patientId);
+    fetchPatients();
+  });
+
+  socket.on("medicines-updated", function (updatedPatient) {
+    patients = patients.map((p) =>
+      p._id === updatedPatient._id ? updatedPatient : p
+    );
+    fetchPatients();
+  });
 });

@@ -1,6 +1,8 @@
 $(document).ready(function () {
   let lineChart;
+  const socket = io();
 
+  let patients = [];
   // Function to create patient element
   function createPatientElement(patient) {
     return `
@@ -95,40 +97,68 @@ $(document).ready(function () {
   }
 
   // Fetch patient data from the server
-  $.ajax({
-    url: "/api/patients",
-    method: "GET",
-    success: function (patients) {
-      $(".patient-list").empty();
-      $(".patient-details").empty();
-      $(".medicines-table").empty();
-      $(".chart-container").html('<canvas id="line-chart"></canvas>');
+  function fetchPatients() {
+    $.ajax({
+      url: "/api/patients",
+      method: "GET",
+      success: function (serverPatients) {
+        patients = serverPatients;
+        $(".patient-list").empty();
+        $(".patient-details").empty();
+        $(".medicines-table").empty();
+        $(".chart-container").html('<canvas id="line-chart"></canvas>');
 
-      patients.forEach((patient) => {
-        $(".patient-list").append(createPatientElement(patient));
-      });
+        serverPatients.forEach((patient) => {
+          $(".patient-list").append(createPatientElement(patient));
+        });
 
-      // Handle click event for patient items
-      $(".patient").click(function () {
-        const patientId = $(this).data("id");
-        const selectedPatient = patients.find(
-          (patient) => patient._id === patientId
-        );
+        $(".patient-list").on("click", ".patient", function () {
+          const patientId = $(this).data("id");
+          const selectedPatient = patients.find(
+            (patient) => patient._id === patientId
+          );
 
-        if (selectedPatient) {
-          displayPatientDetails(selectedPatient);
-          displayMedicines(selectedPatient.medicines);
-          createChart(selectedPatient.status);
+          if (selectedPatient) {
+            displayPatientDetails(selectedPatient);
+            displayMedicines(selectedPatient.medicines);
+            createChart(selectedPatient.status);
+          }
+        });
+
+        // Trigger click on the first patient by default
+        if (patients.length > 0) {
+          $(".patient").first().click();
         }
-      });
-
-      // Trigger click on the first patient by default
-      if (patients.length > 0) {
-        $(".patient").first().click();
-      }
-    },
-    error: function (error) {
-      console.error("Error fetching patient data:", error);
-    },
+      },
+      error: function (error) {
+        console.error("Error fetching patient data:", error);
+      },
+    });
+  }
+  // Socket events for real-time updates
+  socket.on("patient-added", function (newPatient) {
+    patients.push(newPatient); // Add new patient to the array
+    $(".patient-list").append(createPatientElement(newPatient));
   });
+
+  socket.on("patient-deleted", function (patientId) {
+    patients = patients.filter((p) => p._id !== patientId); // Remove patient from array
+    $(`.patient[data-id="${patientId}"]`).remove();
+
+    $(".patient-details").empty();
+    $(".medicines-table").empty();
+    $(".chart-container").html("<p>No Data Available</p>");
+  });
+
+  socket.on("medicines-updated", function (updatedPatient) {
+    const patientIndex = patients.findIndex(
+      (p) => p._id === updatedPatient._id
+    );
+    if (patientIndex !== -1) {
+      patients[patientIndex].medicines = updatedPatient.medicines;
+    }
+    displayMedicines(updatedPatient.medicines);
+  });
+
+  fetchPatients();
 });
