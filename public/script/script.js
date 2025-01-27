@@ -3,7 +3,7 @@ $(document).ready(function () {
   const socket = io();
 
   let patients = [];
-  // Function to create patient element
+  ///////////// Function to create patient element/////////////////////////////////
   function createPatientElement(patient) {
     return `
       <div class="patient" data-id="${patient._id}">
@@ -21,7 +21,7 @@ $(document).ready(function () {
     `;
   }
 
-  // Function to display patient details
+  // ////////////Function to display patient details////////////////////////////////////////
   function displayPatientDetails(selectedPatient) {
     const patientDetails = `
       <img src="/${selectedPatient.image}" alt="Patient" width="100px" class="mainpatient">
@@ -35,7 +35,7 @@ $(document).ready(function () {
     $(".patient-details").html(patientDetails);
   }
 
-  // Function to display medicines table
+  /////////////// Function to display medicines table/////////////////////////////////////
   function displayMedicines(medicines) {
     let medicinesTable = `
       <table class="medicines-table">
@@ -62,10 +62,10 @@ $(document).ready(function () {
     $(".medicines-table").html(medicinesTable);
   }
 
-  // Function to create and display chart
+  ///////////////// Function to create and display chart////////////////////////////
   function createChart(statuses) {
     $(".chart-container").empty().html('<canvas id="line-chart"></canvas>');
-    const ctx1 = document.getElementById("line-chart").getContext("2d");
+    const ctx1 = $("#line-chart")[0].getContext("2d");
 
     if (lineChart) lineChart.destroy();
 
@@ -96,7 +96,7 @@ $(document).ready(function () {
     }
   }
 
-  // Fetch patient data from the server
+  ////////////////// Fetch patient data from the server//////////////////////////
   function fetchPatients() {
     $.ajax({
       url: "/api/patients",
@@ -125,7 +125,6 @@ $(document).ready(function () {
           }
         });
 
-        // Trigger click on the first patient by default
         if (patients.length > 0) {
           $(".patient").first().click();
         }
@@ -135,14 +134,14 @@ $(document).ready(function () {
       },
     });
   }
-  // Socket events for real-time updates
+  ///////////////// Socket events/////////////////////////////////////////
   socket.on("patient-added", function (newPatient) {
-    patients.push(newPatient); // Add new patient to the array
+    patients.push(newPatient);
     $(".patient-list").append(createPatientElement(newPatient));
   });
 
   socket.on("patient-deleted", function (patientId) {
-    patients = patients.filter((p) => p._id !== patientId); // Remove patient from array
+    patients = patients.filter((p) => p._id !== patientId);
     $(`.patient[data-id="${patientId}"]`).remove();
 
     $(".patient-details").empty();

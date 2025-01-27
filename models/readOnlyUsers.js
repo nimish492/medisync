@@ -1,4 +1,3 @@
-// models/readonlyuser.js
 const mongoose = require("mongoose");
 
 const readOnlyUserSchema = new mongoose.Schema({

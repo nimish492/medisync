@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// MongoDB Atlas connection
+/////////// MongoDB Atlas connection////////////////////////////////////
 const uri = process.env.MONGODB_URI;
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Session configuration
 app.use(
   session({
-    secret: "your_secret_key", // Change this secret to something secure
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
   })

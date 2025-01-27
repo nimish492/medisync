@@ -10,7 +10,7 @@ $(document).ready(function () {
     { id: 5, name: "Dr. Diya Gulati" },
   ];
 
-  // Fetch and display patient list
+  //////////// Fetch and display patient list///////////////////////
   function fetchPatients() {
     $.ajax({
       url: "/api/patients",
@@ -56,7 +56,7 @@ $(document).ready(function () {
     });
   }
 
-  // Delete a patient
+  /////////////// Delete a patient///////////////////////////////
   function deletePatient(patientId) {
     $.ajax({
       url: `/api/patients/${patientId}`,
@@ -77,7 +77,7 @@ $(document).ready(function () {
     });
   }
 
-  // Remove medicine
+  ////////////////// Remove medicine///////////////////////////
   $(document).on("click", ".remove-medicine", function () {
     const patientId = $(this).data("patient-id");
     const medicineIndex = $(this).data("medicine-index");
@@ -115,7 +115,7 @@ $(document).ready(function () {
     }
   });
 
-  // Search functionality
+  ////////////// Search functionality///////////////////////
   $("#patient-search").on("input", function () {
     const searchTerm = $(this).val().toLowerCase();
     $(".patient").each(function () {
@@ -124,7 +124,6 @@ $(document).ready(function () {
     });
   });
 
-  // Show and close add patient form
   $("#add-patient").click(function () {
     $("#patientFormModal").show();
   });
@@ -133,7 +132,7 @@ $(document).ready(function () {
     $("#patientFormModal").hide();
   };
 
-  // Populate physician dropdown
+  ////////// Populate physician dropdown////////////////
   function populatePhysicianDropdown() {
     const physicianSelect = $("#physician");
     physicianSelect.empty();
@@ -147,7 +146,7 @@ $(document).ready(function () {
   }
   populatePhysicianDropdown();
 
-  // Add new patient
+  //////////// Add new patient//////////////////////////////////
   $("#patientForm").on("submit", function (e) {
     e.preventDefault();
     const formData = new FormData(this);
@@ -183,7 +182,7 @@ $(document).ready(function () {
     });
   });
 
-  // Open medicine modal
+  ////////////// Open medicine modal///////////////////////////////////////////////////////
   function openMedicineModal(patient) {
     $("#MedicineFormModal").show();
     const medicineTableBody = $("#medicine-table tbody");
@@ -251,14 +250,13 @@ $(document).ready(function () {
     });
   }
 
-  // Close medicine modal
   window.closeMedicineModal = function () {
     $("#MedicineFormModal").hide();
   };
 
   fetchPatients();
 
-  // Socket events
+  ///////////////////// Socket events/////////////////////////////
   socket.on("patient-added", function (newPatient) {
     patients.push(newPatient);
     fetchPatients();

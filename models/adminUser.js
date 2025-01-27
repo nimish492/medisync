@@ -1,11 +1,10 @@
-// models/fulluser.js
 const mongoose = require("mongoose");
 
 const adminUserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true, // Ensure the username is unique
+    unique: true,
     trim: true,
   },
   password: {
@@ -14,7 +13,7 @@ const adminUserSchema = new mongoose.Schema({
   },
 });
 
-// Create a model for full users
+//////////// Create a model for full users///////////////////////////////////
 const AdminUser = mongoose.model("AdminUser", adminUserSchema, "adminusers");
 
 module.exports = AdminUser;

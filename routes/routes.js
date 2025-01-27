@@ -26,7 +26,7 @@ router.get("/patients", async (req, res) => {
   }
 });
 
-// Add a new patient////////////////////////////////////////////////////////////////////////
+///////////////////////// Add a new patient////////////////////////////////////
 router.post("/patients", upload.single("image"), isAdmin, async (req, res) => {
   try {
     const newPatientData = {
@@ -47,7 +47,7 @@ router.post("/patients", upload.single("image"), isAdmin, async (req, res) => {
   }
 });
 
-// Delete a patient//////////////////////////////////////////////////////
+////////////////// Delete a patient////////////////////////////////////////
 router.delete("/patients/:id", isAdmin, async (req, res) => {
   try {
     const result = await Patient.findByIdAndDelete(req.params.id);
@@ -61,19 +61,23 @@ router.delete("/patients/:id", isAdmin, async (req, res) => {
   }
 });
 
-////////billing routes///////////////////////////////////////////
+//////// search in billing ///////////////////////////////////////////
 router.get("/search-patients", async (req, res) => {
   try {
     const searchTerm = req.query.q;
     const patients = await Patient.find({
-      name: { $regex: searchTerm, $options: "i" }, // Case-insensitive search
-    }).select("name"); // Only return the name field
+      name: {
+        $regex: searchTerm,
+        $options: "i" /* (Case-insensitive search)*/,
+      },
+    }).select("name");
     res.json(patients);
   } catch (error) {
     res.status(500).json({ error: "Error searching patients." });
   }
 });
 
+//////////////display selected patient data in billing////////////////////
 router.get("/patients/:id", async (req, res) => {
   try {
     const patient = await Patient.findById(req.params.id);
@@ -87,6 +91,7 @@ router.get("/patients/:id", async (req, res) => {
   }
 });
 
+/////////////Generate bill route///////////////////////////////
 router.patch("/patients/:id", async (req, res) => {
   const patientId = req.params.id;
   const updateData = req.body;
@@ -107,17 +112,16 @@ router.patch("/patients/:id", async (req, res) => {
   }
 });
 
-///////////////medicines routes//////////////////////
+///////////////medicines routes////////////////////////////////
 router.put("/patients/:id/medicines", isAdmin, async (req, res) => {
   try {
     const patientId = req.params.id;
     const updatedMedicines = req.body.medicines;
 
-    // Find the patient by ID and update their medicines
     const patient = await Patient.findByIdAndUpdate(
       patientId,
       { medicines: updatedMedicines },
-      { new: true } // This option ensures that the updated patient document is returned
+      { new: true }
     );
 
     if (!patient) {

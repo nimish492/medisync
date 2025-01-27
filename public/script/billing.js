@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  // Handle patient search input
+  /////////////////// Handle patient search input////////////////////////////
   $("#patient-search").on("input", function () {
     const searchTerm = $(this).val();
 
@@ -32,14 +32,14 @@ $(document).ready(function () {
     }
   });
 
-  // Hide dropdown when clicking outside
+  ///////////////// Hide dropdown when clicking outside//////////////////
   $(document).click(function (e) {
     if (!$(e.target).closest(".search-bar").length) {
       $("#dropdown-list").hide();
     }
   });
 
-  // Handle patient selection
+  /////////////////// Handle patient selection///////////////////////////
   $(document).on("click", "#dropdown-list li", function () {
     const patientId = $(this).data("id");
     $("#patient-search").val($(this).text());
@@ -47,7 +47,7 @@ $(document).ready(function () {
     fetchPatientDetails(patientId);
   });
 
-  // Fetch and display patient details
+  ///////////////// Fetch and display patient details/////////////////////////
   function fetchPatientDetails(patientId) {
     $.ajax({
       url: `/api/patients/${patientId}`,
@@ -109,7 +109,7 @@ $(document).ready(function () {
     });
   }
 
-  // Save hospital charges
+  ///////////// Save hospital charges////////////////////////////////////////
   $(document).on("click", "#save-hospital-charges", function () {
     const hospitalCharges = {
       roomType: $("#room-type").val(),
@@ -118,7 +118,7 @@ $(document).ready(function () {
     updatePatientDetail("hospitalCharges", hospitalCharges);
   });
 
-  // Save medicines charges
+  ////////////// Save medicines charges//////////////////////////////////////
   $(document).on("click", "#save-medicines-charges", function () {
     const medicines = [];
     $("#medicines-list .medicine-item").each(function () {
@@ -131,7 +131,7 @@ $(document).ready(function () {
     updatePatientDetail("medicines", medicines);
   });
 
-  // Update patient detail in database
+  //////////////////Temporory qty field Creation //////////////////////////
   function updatePatientDetail(field, value) {
     const patientId = $("#dropdown-list li").data("id");
     $.ajax({
@@ -147,7 +147,7 @@ $(document).ready(function () {
     });
   }
 
-  // Generate bill and update the billing table
+  ///////////////// Generate bill and update the billing table//////////////////////
   function generateBill() {
     const hospitalCharges = {
       roomType: $("#room-type").val(),
@@ -221,7 +221,7 @@ $(document).ready(function () {
     `);
   }
 
-  // Print the bill
+  ///////////////////// Print the bill////////////////////////////////
   $(document).on("click", "#print-bill-btn", function () {
     const billSection = $("#billing");
 
