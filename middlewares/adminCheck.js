@@ -7,7 +7,7 @@ function isAdmin(req, res, next) {
     ? req.session.user.username
     : "unknown user";
   return res.status(403).json({
-    error: `Permission denied for ${username}. Contact the administrator.`,
+    error: `Permission denied for ${username}. Contact the administrator and ask for Full privileges.`,
   });
 }
 

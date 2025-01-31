@@ -5,11 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/login.css">
     <title>MediSync-Login</title>
 </head>
 
 <body>
+    <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+        <strong>Demo User? </strong> <a
+            href="https://docs.google.com/document/d/1KG0wNcd6NASyJgpRG2vS0gN5xddWxgZlh3Ih0yoyzg8/edit?usp=sharing"
+            style="text-decoration: none;"><strong>Click here </strong></a>for Login
+        Credentials.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="main">
         <div class="divide">
             <div class="form-container">
@@ -17,7 +26,7 @@
                 <form action="/login" method="POST">
                     <input type="text" name="username" placeholder="Username" required />
                     <input type="password" name="password" placeholder="Password" required />
-                    <button type="submit">Login</button>
+                    <button type="submit" id="login">Login</button>
                 </form>
             </div>
             <div class="docoration">
@@ -25,6 +34,9 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

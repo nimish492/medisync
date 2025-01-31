@@ -9,7 +9,15 @@ body {
   height: 100vh;
   color: #333;
 }
-
+#alert {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
 .main {
   width: 80%;
   max-width: 1200px;
@@ -63,7 +71,7 @@ input::placeholder {
   color: #888;
 }
 
-button {
+#login {
   width: 80%;
   padding: 12px;
   margin-top: 20px;
@@ -76,7 +84,7 @@ button {
   transition: background 0.3s;
 }
 
-button:hover {
+#login:hover {
   background: #e65c00;
 }
 
